@@ -12,9 +12,11 @@ const SearchBar = ({type, onClick}: SearchBarProps) => {
   const [title, setTitle] = useState('');
 
   return (
-    <Row>
+    <Col>
       <Row>
-        <h2>Search {type}</h2>
+        <Col>
+          <h2>Search {type}</h2>
+        </Col>
       </Row>
       <Row>
         <Col>
@@ -27,14 +29,14 @@ const SearchBar = ({type, onClick}: SearchBarProps) => {
               onChange={(e) => setTitle(e.target.value)}
             />
             <InputGroup.Append>
-              <InputGroup.Text id="basic-addon2">
-                <FontAwesomeIcon icon={faSearch} onClick={(e) => {e.preventDefault(); onClick(title)}}/>
+              <InputGroup.Text id="basic-addon2" onClick={(e) => {e.preventDefault(); onClick(title)}} style={{cursor: "pointer"}}>
+                <FontAwesomeIcon icon={faSearch}/>
               </InputGroup.Text>
             </InputGroup.Append>
           </InputGroup>
         </Col>
       </Row>
-    </Row>
+    </Col>
   )
 };
 

@@ -3,28 +3,28 @@ import * as types from "./types";
 export function addArtistToFavorites(name: string) {
     return {
         type: types.ADD_ARTIST_TO_FAVORITES,
-        name: name
+        artist: name
     }
 }
 
 export function removeArtistFromFavorites(name: string) {
     return {
         type: types.REMOVE_RELEASE_FROM_FAVORITES,
-        name: name
+        artist: name
     }
 }
 
 export function removeArtistFromShortlist(name: string) {
     return {
         type: types.REMOVE_ARTIST_FROM_SHORTLIST,
-        name: name
+        artist: name
     }
 }
 
 export function addArtistToShortlist(name: string) {
     return {
         type: types.ADD_ARTIST_TO_SHORTLIST,
-        name: name
+        artist: name
     }
 }
 

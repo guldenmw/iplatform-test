@@ -1,7 +1,6 @@
 
 export interface Artist {
   name: string;
-  releases: Release[];
 }
 
 export interface Release {
@@ -24,6 +23,7 @@ export interface AppState {
 
 export interface FavoritesType {
   artists: Artist[];
+  releases: Release[];
 }
 
 export interface ShortlistType {
@@ -36,12 +36,12 @@ export const REMOVE_ARTIST_FROM_FAVORITES = 'REMOVE_ARTIST_FROM_FAVORITES';
 
 interface AddArtistToFavoritesAction {
   type: typeof ADD_ARTIST_TO_FAVORITES
-  name: Artist
+  artist: Artist
 }
 
 interface RemoveArtistFromFavoritesAction {
   type: typeof REMOVE_ARTIST_FROM_FAVORITES
-  name: Artist;
+  artist: Artist;
 }
 
 export type ArtistFavoritesActionTypes = AddArtistToFavoritesAction | RemoveArtistFromFavoritesAction;
@@ -52,12 +52,12 @@ export const REMOVE_ARTIST_FROM_SHORTLIST = 'REMOVE_ARTIST_FROM_SHORTLIST';
 
 interface AddArtistToShortlistAction {
   type: typeof ADD_ARTIST_TO_SHORTLIST;
-  name: string;
+  artist: string;
 }
 
 interface RemoveArtistFromShortlistAction {
   type: typeof REMOVE_ARTIST_FROM_SHORTLIST;
-  name: string;
+  artist: string;
 }
 
 export type ArtistShortlistActionTypes = AddArtistToShortlistAction | RemoveArtistFromShortlistAction;

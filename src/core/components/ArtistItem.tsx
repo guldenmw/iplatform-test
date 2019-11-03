@@ -1,7 +1,7 @@
 import React from 'react';
 import {Image} from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {faStar} from '@fortawesome/free-solid-svg-icons';
+import {faPlusCircle} from '@fortawesome/free-solid-svg-icons';
 
 
 interface ArtistItemType {
@@ -17,7 +17,9 @@ const ArtistItem = ({name, image, onClick}: ArtistItemType) => (
       <Image src={image}/>
     </td>
     <td>{name}</td>
-    <td><FontAwesomeIcon icon={faStar} onClick={onClick}/></td>
+    <td>
+      <FontAwesomeIcon icon={faPlusCircle} onClick={onClick} style={{cursor: "pointer"}}/>
+    </td>
 
   </tr>
 );

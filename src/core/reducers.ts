@@ -4,7 +4,6 @@ import {createHash} from "crypto";
 const initialState: types.AppState = {
   favorites: {
     artists: [],
-    releases: []
   },
   shortlist: {
     artists: []
@@ -16,29 +15,24 @@ export function updateFavoriteArtists(
   action: types.ArtistFavoritesActionTypes
 ): types.AppState {
 
-  let artistId = '';
-
   switch (action.type) {
     case types.ADD_ARTIST_TO_FAVORITES:
-      artistId = createHash('sha1').update(action.artist.name).digest('hex');
-      const artist = {'id': artistId, ...action.artist};
 
       return {
         ...state,
         favorites: {
           ...state.favorites,
-          artists: [artist, ...state.favorites.artists]
+          artists: [action.name, ...state.favorites.artists]
         }
       };
 
     case types.REMOVE_ARTIST_FROM_FAVORITES:
-      artistId = createHash('sha1').update(action.artist.name).digest('hex');
 
       return {
         ...state,
         favorites: {
           ...state.favorites,
-          artists: state.favorites.artists.filter((artist) => artist.id !== artistId)
+          artists: state.favorites.artists.filter((name) => name !== action.name)
         }
       };
 
@@ -52,27 +46,26 @@ export function updateShortlistArtists(
   action: types.ArtistShortlistActionTypes
 ): types.AppState {
 
-  let artistId = '';
-
   switch (action.type) {
     case types.ADD_ARTIST_TO_SHORTLIST:
-      artistId = createHash('sha1').update(action.artist).digest('hex');
-      const artist = {'name': action.artist, 'id': artistId};
+      if (state.shortlist.artists.includes(action.name)) {
+        return state
+      } else {
 
-      return {
-        ...state,
-        shortlist: {
-          artists: [artist, ...state.shortlist.artists]
+        return {
+          ...state,
+          shortlist: {
+            artists: [action.name, ...state.shortlist.artists]
+          }
         }
-      };
+      }
 
     case types.REMOVE_ARTIST_FROM_SHORTLIST:
-      artistId = createHash('sha1').update(action.artist).digest('hex');
 
       return {
         ...state,
         shortlist: {
-          artists: state.shortlist.artists.filter((artist) => artist.id !== artistId),
+          artists: state.shortlist.artists.filter((name) => name !== action.name),
         }
       };
 
@@ -85,29 +78,55 @@ export function updateFavoriteReleases(
   state = initialState,
   action: types.ReleaseFavoritesActionTypes
 ): types.AppState {
-  let releaseId = '';
+  let artists = state.favorites.artists.slice(0);
+
+  let artist = artists.find(artist => {
+    return artist.name === action.release.artist
+  });
+
+  let artistIndex = artist ? artists.indexOf(artist) : 0;
 
   switch (action.type) {
     case types.ADD_RELEASE_TO_FAVORITES:
-      releaseId = createHash('sha1').update(action.release.title).digest('hex');
-      const release = {...action.release, 'id': releaseId};
+
+      if (artist) {
+        if (artist.releases.includes(action.release)) {
+          return state
+
+        }
+        artist.releases.unshift(action.release);
+
+        artists.splice(artistIndex, 1, artist);
+
+      } else {
+        artist = {
+          'name': action.release.artist,
+          releases: [action.release]
+        };
+
+        artists.unshift(artist);
+      }
 
       return {
         ...state,
         favorites: {
-          ...state.favorites,
-          releases: [release, ...state.favorites.releases]
+          artists
         }
       };
 
     case types.REMOVE_RELEASE_FROM_FAVORITES:
-      releaseId = createHash('sha1').update(action.release.title).digest('hex');
+      if (!artist) {
+        return state
+      }
+
+      artists[artistIndex].releases = artists[artistIndex].releases.filter(
+        (release) => release.title !== action.release.title
+      );
 
       return {
         ...state,
         favorites: {
-          ...state.favorites,
-          releases: state.favorites.releases.filter((release) => release.id !== releaseId)
+          artists
         }
       };
 

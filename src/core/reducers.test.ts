@@ -1,11 +1,7 @@
 import * as reducers from './reducers'
 import * as types from './types';
 
-const originalArtist = {
-  id: '678ad54378fe6a427163dfa65957044ce9add7f1',
-  name: 'Artist Name 1',
-  image: '/some/url/'
-};
+const originalArtist = 'Artist Name 1';
 
 const originalRelease = {
   id: '7a9fcb0b988f2c28bba235a5521ad295fb8d28d1',
@@ -32,11 +28,7 @@ const initialState: types.AppState = {
   }
 };
 
-const newArtist = {
-  id: '494f8cd3491e6eda5743f467a30370bb2a5f45ff',
-  name: 'Artist Name 2',
-  image: '/some/other/url/'
-};
+const newArtist = 'Artist Name 2';
 
 const newRelease = {
   id: '0d10c006c1d1d0a11885306c4ef820d81fdc7519',
@@ -51,7 +43,7 @@ describe('artist favorites reducer', () => {
   it('should add new artist to favorites', () => {
     expect(
       reducers.updateFavoriteArtists(initialState, {
-        type: types.ADD_ARTIST_TO_FAVORITES, artist: newArtist
+        type: types.ADD_ARTIST_TO_FAVORITES, name: newArtist
       })
     ).toStrictEqual({
       favorites: {
@@ -68,7 +60,7 @@ describe('artist favorites reducer', () => {
   it('should remove original artist from favorites', () => {
     expect(
       reducers.updateFavoriteArtists(initialState, {
-        type: types.REMOVE_ARTIST_FROM_FAVORITES, artist: originalArtist
+        type: types.REMOVE_ARTIST_FROM_FAVORITES, name: originalArtist
       })
     ).toStrictEqual({
       favorites: {
@@ -87,7 +79,7 @@ describe('artist shortlist reducer', () => {
   it('should add new artist to shortlist', () => {
     expect(
       reducers.updateShortlistArtists(initialState, {
-        type: types.ADD_ARTIST_TO_SHORTLIST, artist: newArtist
+        type: types.ADD_ARTIST_TO_SHORTLIST, name: newArtist
       })
     ).toStrictEqual({
       shortlist: {
@@ -101,10 +93,27 @@ describe('artist shortlist reducer', () => {
     })
   });
 
+  it('should not add duplicate original artist to shortlist', () => {
+    expect(
+      reducers.updateShortlistArtists(initialState, {
+        type: types.ADD_ARTIST_TO_SHORTLIST, name: originalArtist
+      })
+    ).toStrictEqual({
+      shortlist: {
+        artists: [originalArtist]
+      },
+      favorites: {
+        artists: [originalArtist],
+        releases: [originalRelease]
+      }
+
+    })
+  });
+
   it('should remove original artist from shortlist', () => {
     expect(
       reducers.updateShortlistArtists(initialState, {
-        type: types.REMOVE_ARTIST_FROM_SHORTLIST, artist: originalArtist
+        type: types.REMOVE_ARTIST_FROM_SHORTLIST, name: originalArtist
       })
     ).toStrictEqual({
       shortlist: {

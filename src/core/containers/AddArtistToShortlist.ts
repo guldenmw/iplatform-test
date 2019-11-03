@@ -13,7 +13,6 @@ const mapStateToProps = (state: AppState) => {
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     onClick: () => {
-      console.log(ownProps.name);
       dispatch(addArtistToShortlist(ownProps.name))
     }
   }

@@ -1,30 +1,30 @@
 import * as types from "./types";
 
-export function addArtistToFavorites(artist: string) {
+export function addArtistToFavorites(name: string) {
     return {
         type: types.ADD_ARTIST_TO_FAVORITES,
-        artist: artist
+        name: name
     }
 }
 
-export function removeArtistFromFavorites(artist: string) {
+export function removeArtistFromFavorites(name: string) {
     return {
         type: types.REMOVE_RELEASE_FROM_FAVORITES,
-        artist: artist
+        name: name
     }
 }
 
-export function removeArtistFromShortlist(artist: string) {
+export function removeArtistFromShortlist(name: string) {
     return {
         type: types.REMOVE_ARTIST_FROM_SHORTLIST,
-        artist: artist
+        name: name
     }
 }
 
-export function addArtistToShortlist(artist: string) {
+export function addArtistToShortlist(name: string) {
     return {
         type: types.ADD_ARTIST_TO_SHORTLIST,
-        artist: artist
+        name: name
     }
 }
 

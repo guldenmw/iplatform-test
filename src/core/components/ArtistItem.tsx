@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {FC} from 'react';
 import {Image} from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faPlusCircle} from '@fortawesome/free-solid-svg-icons';
@@ -11,7 +11,7 @@ interface ArtistItemType {
 }
 
 
-const ArtistItem = ({name, image, onClick}: ArtistItemType) => (
+const ArtistItem: FC<ArtistItemType> = ({name, image, onClick}) => (
   <tr>
     <td>
       <Image src={image}/>

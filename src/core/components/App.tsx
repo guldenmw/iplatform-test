@@ -1,9 +1,6 @@
 import React from 'react';
 import './App.css';
-import { combineReducers } from 'redux';
-import { createStore } from 'redux';
 import { Provider } from 'react-redux';
-import { composeWithDevTools } from 'redux-devtools-extension';
 import {
   BrowserRouter as Router,
   Switch,
@@ -12,18 +9,10 @@ import {
 } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Navbar} from "react-bootstrap";
-import {updateFavoriteArtists, updateShortlistArtists, updateFavoriteReleases} from '../reducers'
-import AddArtistToShortlist from "../containers/AddArtistToShortlist";
+import store from '../store';
 import SearchArists from "./SearchArtists";
+import SearchReleasesContainer from "../containers/SearchReleasesContainer";
 
-
-const rootReducer = combineReducers({
-  updateFavoriteArtists,
-  updateShortlistArtists,
-  updateFavoriteReleases
-});
-
-const store = createStore(rootReducer, composeWithDevTools());
 
 const App: React.FC = () => {
   return (
@@ -40,13 +29,13 @@ const App: React.FC = () => {
 
         <Switch>
           <Route path="/my_artists">
-              <SearchArists/>
+              <div>Artists</div>
           </Route>
           <Route path="/search_artists">
-              <AddArtistToShortlist artist={''}/>
+              <SearchArists/>
           </Route>
           <Route path="/search_releases">
-              <div>"search_releases"</div>
+              <SearchReleasesContainer/>
           </Route>
         </Switch>
       </Router>

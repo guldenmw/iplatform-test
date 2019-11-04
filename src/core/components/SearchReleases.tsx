@@ -1,16 +1,76 @@
 import React, {FC, useState} from 'react';
 
-import {Button, Col, Container, Row, Table} from "react-bootstrap";
+import {Button, Col, Container, Table} from "react-bootstrap";
 import {faExclamation} from '@fortawesome/free-solid-svg-icons';
 
 import SearchBar from "./SearchBar";
-import AddArtistToShortlist from "../containers/AddArtistToShortlist";
+import SearchReleasesResults from "../containers/SearchReleasesResults";
 import ShowShortlist from '../containers/ShowShortlist'
 import EmptyTable from "./EmptyTable";
 
 
-const SearchReleases: FC = () => {
-  const [data, setData] = useState([]);
+const formatReleases = (releases, favorites) => {
+  const newReleases = releases.map((release) => {
+
+    let favorite = false;
+
+    favorite = favorites.some((art) => {
+      return art.releases.findIndex((rel) => {
+        return  rel.title === release.title;
+      }) > -1;
+    });
+    console.log("favorite: ", favorite);
+
+    let labels = [];
+    if ('label-info' in release) {
+      labels = release['label-info'].map((info) => {
+        if ('label' in info) {
+          return info.label.name
+        }
+      })
+    }
+
+    return {
+      artist: release['artist-credit'][0].name,
+      title: release.title,
+      year: release.date,
+      labels: labels,
+      tracks: release['track-count'],
+      favorite: favorite
+    }
+  });
+
+  let uniqueArtists = Array();
+  newReleases.map(release => {
+    if (!uniqueArtists.includes(release.artist)) {
+      uniqueArtists.push(release.artist)
+    }
+  });
+
+  return uniqueArtists.map((artist) => {
+    const artistReleases = newReleases.filter(rel => {
+      return rel.artist === artist
+    });
+
+    return {
+      name: artist,
+      releases: artistReleases
+    }
+  });
+};
+
+
+const SearchResults = (artists) => {
+  return (
+    artists.artists.map((artist, index) => (
+      <SearchReleasesResults key={index} artist={artist}/>
+    ))
+  )
+
+};
+
+const SearchReleases = ({favorites}) => {
+  const [artists, setArtists] = useState(Array());
   const [loading, setLoading] = useState(false);
   const [showReleases, setReleasesVisible] = useState(false);
 
@@ -21,13 +81,15 @@ const SearchReleases: FC = () => {
     const response = await fetch(url);
     const json = await response.json();
 
-    setData(json.releases);
+    const artists = formatReleases(json.releases, favorites);
+
+    setArtists(artists);
     setLoading(false);
   }
 
   return (
     <Container>
-      <SearchBar type={'Artists'} onClick={fetchUrl}/>
+      <SearchBar type={'Releases'} onClick={fetchUrl}/>
       <Col className="d-flex justify-content-end">
         <Button onClick={() => setReleasesVisible(!showReleases)}>{
           showReleases ? "Hide Releases" : "Show Releases"}
@@ -36,7 +98,7 @@ const SearchReleases: FC = () => {
 
       {showReleases && <ShowShortlist/>}
 
-      {data.length < 1 && !loading ? (
+      {artists.length < 1 && !loading ? (
         <EmptyTable message={"Try searching for something"} icon={faExclamation}/>
       ) : (
         <Col>
@@ -52,18 +114,13 @@ const SearchReleases: FC = () => {
             {loading ? (
               <tbody>
                 <tr>
-                  <td/>
-                  <td>
+                  <td colSpan={2}>
                     <span>Loading...</span>
                   </td>
                 </tr>
               </tbody>
             ) : (
-              <tbody>
-                {data.map(({image, name}) => (
-                  <AddArtistToShortlist key={name} name={name} image={image[0]['#text']}/>
-                ))}
-              </tbody>
+              <SearchResults artists={artists}/>
             )}
           </Table>
         </Col>

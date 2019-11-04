@@ -1,6 +1,6 @@
 import React, {FC, useState} from 'react';
 
-import {Button, Col, Container, Row, Table} from "react-bootstrap";
+import {Button, Col, Container, Table} from "react-bootstrap";
 import {faExclamation} from '@fortawesome/free-solid-svg-icons';
 
 import SearchBar from "./SearchBar";

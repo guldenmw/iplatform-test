@@ -1,26 +1,15 @@
 import React, {FC} from 'react';
 import {Col, Row, Table} from "react-bootstrap";
-import {ShortlistArtist, ShortlistType} from "../types";
 import EmptyTable from "./EmptyTable";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faHeartBroken, faStar} from '@fortawesome/free-solid-svg-icons';
 
-interface ShortlistItemType {
-  artist: ShortlistArtist;
+
+interface ShortlistType {
+  artists: string[];
 }
 
-const ShortlistItem: FC<ShortlistItemType> = ({artist}) => (
-  <tr>
-    <td>
-      <FontAwesomeIcon icon={faStar}/>
-    </td>
-    <td>
-      {artist}
-    </td>
-  </tr>
-);
-
-const Shortlist = ({artists}: ShortlistType) => (
+const Shortlist: FC<ShortlistType> = ({artists}) => (
   <Row  className="d-flex justify-content-center">
     <Col sm={6}>
       {artists.length < 1 ? (
@@ -35,7 +24,14 @@ const Shortlist = ({artists}: ShortlistType) => (
           </thead>
           <tbody>
             {artists.map((artist, index) => (
-              <ShortlistItem key={index} artist={artist}/>
+              <tr key={index}>
+                <td>
+                  <FontAwesomeIcon icon={faStar}/>
+                </td>
+                <td>
+                  {artist}
+                </td>
+              </tr>
             ))}
           </tbody>
 

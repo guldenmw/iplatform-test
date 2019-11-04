@@ -21,6 +21,7 @@
     "react-scripts": "3.2.0",
     "redux": "^4.0.4",
     "redux-devtools-extension": "^2.13.8",
+    "redux-mock-store": "^1.5.3",
     "typescript": "3.6.4"
   },
   "scripts": {
@@ -42,12 +43,6 @@
       "last 1 chrome version",
       "last 1 firefox version",
       "last 1 safari version"
-    ]
-  },
-  "jest": {
-    "collectCoverageFrom": [
-      "src/*.tsx",
-      "src/*.ts"
     ]
   }
 }

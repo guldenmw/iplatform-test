@@ -1,7 +1,6 @@
 import { connect } from 'react-redux';
-import {addArtistToFavorites} from '../actions';
+import {addArtist} from '../store/favorites/actions';
 import Shortlist from '../components/Shortlist';
-import {AppState} from "../types";
 
 
 const mapStateToProps = (state) => {
@@ -13,7 +12,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     onClick: () => {
-      dispatch(addArtistToFavorites(ownProps.name))
+      dispatch(addArtist(ownProps.name))
     }
   }
 };

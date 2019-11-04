@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import {removeArtist, removeRelease} from '../store/favorites/actions';
-import Favorites from "../components/Favorites";
+import Favorites from "../components/Utility/Favorites";
 
 
 const mapStateToProps = (state) => {
@@ -9,13 +9,10 @@ const mapStateToProps = (state) => {
   }
 };
 
-const mapDispatchToProps = (dispatch, ownProps) => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    handleRemoveArtist: () => {
-      dispatch(removeArtist(ownProps.name))
-    },
-    handleRemoveRelease: () => {
-      dispatch(removeRelease(ownProps.artist, ownProps.title))
+    handleRemoveArtist: (artist) => {
+      dispatch(removeArtist(artist))
     }
   }
 };

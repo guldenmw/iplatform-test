@@ -10,8 +10,9 @@ import {
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Navbar} from "react-bootstrap";
 import store from '../store';
-import SearchArists from "./SearchArtists";
-import SearchReleasesContainer from "../containers/SearchReleasesContainer";
+import SearchArists from "./Artists/SearchArtists";
+import SearchReleases from "./Releases/SearchReleases";
+import ListFavorites from "../containers/ListFavorites";
 
 
 const App: React.FC = () => {
@@ -29,13 +30,13 @@ const App: React.FC = () => {
 
         <Switch>
           <Route path="/my_artists">
-              <div>Artists</div>
+              <ListFavorites/>
           </Route>
           <Route path="/search_artists">
               <SearchArists/>
           </Route>
           <Route path="/search_releases">
-              <SearchReleasesContainer/>
+              <SearchReleases/>
           </Route>
         </Switch>
       </Router>

@@ -1,24 +1,36 @@
 import React, {FC, useState} from 'react';
-import {Col, Container, Row} from "react-bootstrap";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faTimesCircle, faStar} from "@fortawesome/free-solid-svg-icons";
 import {Table} from "react-bootstrap";
-import {Artist, Release} from "../store/favorites/types";
+import {ReleaseItemType, ArtistReleasesItemType} from "../types";
 
 
-interface ReleaseItemsType {
-  artist: Artist;
-  canEditArtists: boolean;
-  handleRemoveArtist(artist: string): void;
-  handleAddRelease(release: Release): void;
-  handleRemoveRelease(artist: string, release: string): void;
-}
+const ReleaseItem: FC<ReleaseItemType> = ({release, context, handleAddOrRemoveRelease}) => {
+  const [favorite, toggleFavorite] = useState(context !== "Search");
+
+  return (
+    <tr>
+      <td>
+        <FontAwesomeIcon icon={faStar} onClick={() => {
+          handleAddOrRemoveRelease(release, favorite);
+          toggleFavorite(!favorite);
+        }} className={favorite ? 'text-primary' : 'text-secondary'}/>
+      </td>
+      <td>{release.year}</td>
+      <td>{release.title}</td>
+      <td>{release.labels}</td>
+      <td>{release.tracks}</td>
+    </tr>
+  )
+};
 
 
-const ReleaseItems: FC<ReleaseItemsType> = (
-  {artist, canEditArtists = false, handleRemoveArtist, handleAddRelease, handleRemoveRelease}
+const ArtistReleasesItem: FC<ArtistReleasesItemType> = (
+  {artist, context, canEditArtists = false, handleRemoveArtist, handleAddOrRemoveRelease}
   ) => {
   const [showReleases, toggleReleases] = useState(false);
+
+  console.log(artist);
 
   return (
     <tbody>
@@ -51,17 +63,7 @@ const ReleaseItems: FC<ReleaseItemsType> = (
               </thead>
               <tbody>
                 {artist.releases.map((release, index) => (
-                  <tr key={index}>
-                    <td>
-                      <FontAwesomeIcon icon={faStar} onClick={() => {
-                        release.favorite ? handleRemoveRelease(release.artist, release.title) : handleAddRelease(release)
-                      }}/>
-                    </td>
-                    <td>{release.year}</td>
-                    <td>{release.title}</td>
-                    <td>{release.labels}</td>
-                    <td>{release.tracks}</td>
-                  </tr>
+                  <ReleaseItem key={index} context={context} release={release} handleAddOrRemoveRelease={handleAddOrRemoveRelease}/>
                 ))}
               </tbody>
             </Table>
@@ -72,4 +74,4 @@ const ReleaseItems: FC<ReleaseItemsType> = (
   )
 };
 
-export default ReleaseItems
+export default ArtistReleasesItem

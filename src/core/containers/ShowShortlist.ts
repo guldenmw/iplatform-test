@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import {addArtist} from '../store/favorites/actions';
-import Shortlist from '../components/Shortlist';
+import Shortlist from '../components/Utility/Shortlist';
 
 
 const mapStateToProps = (state) => {

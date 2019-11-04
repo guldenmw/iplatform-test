@@ -1,26 +1,15 @@
-import React, {FC, useState} from 'react';
+import React, {useState} from 'react';
 
-import {Button, Col, Container, Table} from "react-bootstrap";
+import {Col, Container, Table} from "react-bootstrap";
 import {faExclamation} from '@fortawesome/free-solid-svg-icons';
 
-import SearchBar from "./SearchBar";
-import SearchReleasesResults from "../containers/SearchReleasesResults";
-import ShowShortlist from '../containers/ShowShortlist'
-import EmptyTable from "./EmptyTable";
+import SearchBar from "../Utility/SearchBar";
+import ArtistReleasesItemContainer from "../../containers/ArtistReleasesItemContainer";
+import EmptyTable from "../Utility/EmptyTable";
 
 
-const formatReleases = (releases, favorites) => {
+const formatReleases = (releases) => {
   const newReleases = releases.map((release) => {
-
-    let favorite = false;
-
-    favorite = favorites.some((art) => {
-      return art.releases.findIndex((rel) => {
-        return  rel.title === release.title;
-      }) > -1;
-    });
-    console.log("favorite: ", favorite);
-
     let labels = [];
     if ('label-info' in release) {
       labels = release['label-info'].map((info) => {
@@ -36,7 +25,6 @@ const formatReleases = (releases, favorites) => {
       year: release.date,
       labels: labels,
       tracks: release['track-count'],
-      favorite: favorite
     }
   });
 
@@ -63,16 +51,15 @@ const formatReleases = (releases, favorites) => {
 const SearchResults = (artists) => {
   return (
     artists.artists.map((artist, index) => (
-      <SearchReleasesResults key={index} artist={artist}/>
+      <ArtistReleasesItemContainer key={index} artist={artist} context={"Search"}/>
     ))
   )
 
 };
 
-const SearchReleases = ({favorites}) => {
+const SearchReleases = () => {
   const [artists, setArtists] = useState(Array());
   const [loading, setLoading] = useState(false);
-  const [showReleases, setReleasesVisible] = useState(false);
 
   async function fetchUrl(title) {
     setLoading(true);
@@ -81,7 +68,7 @@ const SearchReleases = ({favorites}) => {
     const response = await fetch(url);
     const json = await response.json();
 
-    const artists = formatReleases(json.releases, favorites);
+    const artists = formatReleases(json.releases);
 
     setArtists(artists);
     setLoading(false);
@@ -90,13 +77,6 @@ const SearchReleases = ({favorites}) => {
   return (
     <Container>
       <SearchBar type={'Releases'} onClick={fetchUrl}/>
-      <Col className="d-flex justify-content-end">
-        <Button onClick={() => setReleasesVisible(!showReleases)}>{
-          showReleases ? "Hide Releases" : "Show Releases"}
-        </Button>
-      </Col>
-
-      {showReleases && <ShowShortlist/>}
 
       {artists.length < 1 && !loading ? (
         <EmptyTable message={"Try searching for something"} icon={faExclamation}/>

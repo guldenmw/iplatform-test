@@ -3,10 +3,10 @@ import React, {FC, useState} from 'react';
 import {Button, Col, Container, Table} from "react-bootstrap";
 import {faExclamation} from '@fortawesome/free-solid-svg-icons';
 
-import SearchBar from "./SearchBar";
-import AddArtistToShortlist from "../containers/AddArtistToShortlist";
-import ShowShortlist from '../containers/ShowShortlist'
-import EmptyTable from "./EmptyTable";
+import SearchBar from "../Utility/SearchBar";
+import AddArtistToShortlist from "../../containers/AddArtistToShortlist";
+import ShowShortlist from '../../containers/ShowShortlist'
+import EmptyTable from "../Utility/EmptyTable";
 
 
 const SearchArists: FC = () => {

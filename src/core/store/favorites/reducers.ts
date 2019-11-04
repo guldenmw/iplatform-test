@@ -38,14 +38,14 @@ const removeReleaseFromFavorites = (state, action) => {
   const favorites = state.slice(0);
 
   // find the index to determine whether it already exists, if so, store it for later use
-  const artistIndex = favorites.findIndex(art => art.name === action.release.artist);
+  const artistIndex = favorites.findIndex(art => art.name === action.artist);
 
   // this shouldn't really happen either, but better to be sure
   if (artistIndex === -1) {
     return state
   }
   // remove the release from the artist by it's title
-  favorites[artistIndex].releases = favorites[artistIndex].releases.filter(release => release.title !== action.release.title);
+  favorites[artistIndex].releases = favorites[artistIndex].releases.filter(release => release.title !== action.title);
 
   return favorites;
 };

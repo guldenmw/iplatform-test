@@ -10,7 +10,7 @@ export function addArtist(name: string) {
 
 export function removeArtist(name: string) {
     return {
-        type: REMOVE_RELEASE,
+        type: REMOVE_ARTIST,
         artist: name
     }
 }
@@ -24,7 +24,7 @@ export function addRelease(release: Release) {
 
 export function removeRelease(artist: string, title: string) {
     return {
-        type: REMOVE_ARTIST,
+        type: REMOVE_RELEASE,
         artist: artist,
         title: title
     }

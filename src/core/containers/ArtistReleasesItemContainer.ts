@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import {addRelease, removeArtist, removeRelease} from '../store/favorites/actions';
-import ArtistReleasesItem from "../components/Releases/ArtistReleasesItem";
+import ArtistReleasesItem from "../../components/Releases/ArtistReleasesItem";
 
 
 const mapDispatchToProps = (dispatch) => {

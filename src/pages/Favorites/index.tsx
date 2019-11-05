@@ -1,15 +1,17 @@
 import React, {FC, useState} from 'react';
-import {Artist} from "../../store/favorites/types";
-import {Button, Col, Container, Table} from "react-bootstrap";
-import {faExclamation} from "@fortawesome/free-solid-svg-icons";
-import SearchBar from "./SearchBar";
-import EmptyTable from "./EmptyTable";
-import ArtistReleasesItemContainer from "../../containers/ArtistReleasesItemContainer";
+import { connect } from 'react-redux';
+import { Artist } from "../../core/store/favorites/types";
+import { Col, Container, Table} from "react-bootstrap";
+import { faExclamation } from "@fortawesome/free-solid-svg-icons";
+import SearchBar from "../../components/SearchBar";
+import EmptyTable from "../../components/EmptyTable";
+import ArtistReleasesItemContainer from "../../core/containers/ArtistReleasesItemContainer";
+import {mapDispatchToProps, mapStateToProps} from "./container";
 
 
-interface FavoritesComponentType {
-  favorites: Artist[];
-  handleRemoveArtist(name: string): void;
+interface IProps {
+  handleRemoveArtist?: (name: string) => void;
+  favorites?: any[]; // TODO: Type these
 }
 
 const ArtistReleases = (artists) => {
@@ -20,12 +22,12 @@ const ArtistReleases = (artists) => {
   )
 };
 
-const Favorites: FC<FavoritesComponentType> = ({favorites}) => {
+const Favorites: FC<IProps> = ({favorites}) => {
   const [loading, setLoading] = useState(false);
 
   return (
     <Container>
-      <SearchBar type={'My Artists'} onClick={() => {}}/>
+      <SearchBar onClick={() => {}} onChange={() => {}} value={''}/>
 
       {favorites.length < 1 && !loading ? (
         <EmptyTable message={"Try searching for something"} icon={faExclamation}/>
@@ -58,4 +60,7 @@ const Favorites: FC<FavoritesComponentType> = ({favorites}) => {
   )
 };
 
-export default Favorites
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Favorites) as typeof Favorites;

@@ -3,9 +3,9 @@ import React, {useState} from 'react';
 import {Col, Container, Table} from "react-bootstrap";
 import {faExclamation} from '@fortawesome/free-solid-svg-icons';
 
-import SearchBar from "../Utility/SearchBar";
-import ArtistReleasesItemContainer from "../../containers/ArtistReleasesItemContainer";
-import EmptyTable from "../Utility/EmptyTable";
+import SearchBar from "../SearchBar";
+import ArtistReleasesItemContainer from "../../core/containers/ArtistReleasesItemContainer";
+import EmptyTable from "../EmptyTable";
 
 
 const formatReleases = (releases) => {
@@ -76,7 +76,7 @@ const SearchReleases = () => {
 
   return (
     <Container>
-      <SearchBar type={'Releases'} onClick={fetchUrl}/>
+      <SearchBar onClick={fetchUrl} onChange={() => {}} value={''}/>
 
       {artists.length < 1 && !loading ? (
         <EmptyTable message={"Try searching for something"} icon={faExclamation}/>

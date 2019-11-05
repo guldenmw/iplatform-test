@@ -1,4 +1,4 @@
-import {Artist, Release} from "../store/favorites/types";
+import {Artist, Release} from "../core/store/favorites/types";
 
 export interface ArtistReleasesItemType {
   artist: Artist;

@@ -25,7 +25,6 @@ export const mapStateToProps = (state: AppState) => {
 
 export const mapDispatchToProps = dispatch => ({
   startSearch(searchText: string) {
-    console.log('searching artists!');
     dispatch(searchArtists(searchText));
   },
   searchTextChange(searchText: string) {

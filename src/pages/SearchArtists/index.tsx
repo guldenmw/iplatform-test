@@ -68,7 +68,7 @@ const SearchArtists: FC<IProps> = (props) => {
         <EmptyTable message={'Try searching for something'} icon={faExclamation}/>
       )}
 
-      {showEmptyTable && (
+      {!showEmptyTable && (
         <Col>
           <h1>Search Results:</h1>
 

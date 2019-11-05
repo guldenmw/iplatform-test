@@ -2,7 +2,8 @@ import {combineReducers, createStore, applyMiddleware} from "redux";
 import { persistStore, persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage' // defaults to localStorage for web
 import favorites from "./favorites/reducers";
-import searchReducer from "./search/reducer";
+import musicBrainzReducer from "./search/musicbrainz/reducer";
+import lastFMReducer from "./search/lastfm/reducer";
 import shortlist from "./shortlist/reducer";
 import {composeWithDevTools} from "redux-devtools-extension";
 import thunk from 'redux-thunk';
@@ -14,7 +15,8 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
   favorites,
-  search: searchReducer,
+  lastFM: lastFMReducer,
+  musicBrainz: musicBrainzReducer,
   shortlist,
 });
 

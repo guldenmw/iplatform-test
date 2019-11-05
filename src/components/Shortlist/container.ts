@@ -2,7 +2,7 @@ import { AppState } from '../../core/store';
 import { getShortlist } from '../../core/store/shortlist/selectors';
 import { addShortlistItem } from '../../core/store/shortlist/actions';
 
-import IArtistResult from '../../core/store/search/types';
+import ILastFMArtist from "../../core/store/search/lastfm/types/LastFMArtistsResults";
 
 export const mapStateToProps = (state: AppState) => {
   const shortlist = getShortlist(state);
@@ -11,7 +11,7 @@ export const mapStateToProps = (state: AppState) => {
 
 export const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    addArtist: (artist: IArtistResult) => {
+    addArtist: (artist: ILastFMArtist) => {
       dispatch(addShortlistItem(artist))
     }
   }

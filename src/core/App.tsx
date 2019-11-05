@@ -15,7 +15,7 @@ import {Navbar} from "react-bootstrap";
 import { store } from './store';
 
 import SearchArtists from "../pages/SearchArtists";
-import SearchReleases from "../components/Releases/SearchReleases";
+import SearchReleases from "../pages/SearchReleases";
 import Favorites from "../pages/Favorites";
 
 

@@ -1,18 +1,14 @@
-import {
-  AppState,
-} from '../../core/store';
+import { AppState } from '../../core/store';
 
-import { artistsSearchTextChange } from '../../core/store/search/actions';
-import searchArtists from '../../core/store/search/thunks/SearchArtists';
+import { artistsSearchTextChange } from '../../core/store/search/lastfm/actions';
+import searchArtists from '../../core/store/search/lastfm/thunks/SearchArtists';
 
 export const mapStateToProps = (state: AppState) => {
   const {
-    search: {
-      artists: {
-        isLoading,
-        results,
-        searchText,
-      }
+    lastFM: {
+      isLoading,
+      results,
+      searchText,
     }
   } = state;
 

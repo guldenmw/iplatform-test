@@ -2,12 +2,12 @@ import {
   ADD_SHORTLIST_ITEM,
   REMOVE_SHORTLIST_ITEM,
 } from '../actions'
+import ILastFMArtist from "../../search/lastfm/types/LastFMArtistsResults";
 
-import IArtistResult from '../../search/types';
 
-const initialState: IArtistResult[] = [];
+const initialState: ILastFMArtist[] = [];
 
-export default (state = initialState, action: { type: string, data: IArtistResult }) => {
+export default (state = initialState, action: { type: string, data: ILastFMArtist }) => {
   const { type, data } = action;
   switch(type) {
     case ADD_SHORTLIST_ITEM: {

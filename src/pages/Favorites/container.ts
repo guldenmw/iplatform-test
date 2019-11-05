@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
-import {removeArtist, removeRelease} from '../../core/store/favorites/actions';
+import {removeFavoritesArtist} from '../../core/store/favorites/actions';
+import IMusicBrainzArtist from "../../core/store/search/musicbrainz/types/MusicBrainzArtistsResults";
 
 
 export const mapStateToProps = (state) => {
@@ -10,8 +11,8 @@ export const mapStateToProps = (state) => {
 
 export const mapDispatchToProps = (dispatch) => {
   return {
-    handleRemoveArtist: (artist) => {
-      dispatch(removeArtist(artist))
+    handleRemoveArtist: (artist: IMusicBrainzArtist) => {
+      dispatch(removeFavoritesArtist(artist))
     }
   }
 };

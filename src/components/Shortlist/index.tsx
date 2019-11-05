@@ -9,15 +9,15 @@ import { Col, Row, Table } from 'react-bootstrap';
 import EmptyTable from '../EmptyTable';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeartBroken, faStar } from '@fortawesome/free-solid-svg-icons';
-import IArtistResult from '../../core/store/search/types';
+import ILastFMArtist from "../../core/store/search/lastfm/types/LastFMArtistsResults";
 
 interface IProps {
-  shortlist?: IArtistResult[];
-  addArtist?: (artist: IArtistResult) => void;
+  shortlist?: ILastFMArtist[];
+  addArtist?: (artist: ILastFMArtist) => void;
 }
 
 const Shortlist: FC<IProps> = ({ shortlist, addArtist }) => {
-  const handleAddArtist = (artist: IArtistResult) => (event) => {
+  const handleAddArtist = (artist: ILastFMArtist) => (event) => {
     addArtist(artist);
   };
 

@@ -1,14 +1,14 @@
 export interface ILastFMArtistResults {
-  results: IArtistSearchResults;
+  results: ILastFMArtistSearchResults;
 }
 
-interface IArtistSearchResults {
+interface ILastFMArtistSearchResults {
   'opensearch:Query': OpensearchQuery;
   'opensearch:totalResults': string;
   'opensearch:startIndex': string;
   'opensearch:itemsPerPage': string;
   artistmatches: {
-    artist: IArtistResult[];
+    artist: ILastFMArtist[];
   };
   '@attr': Attr;
 }
@@ -17,7 +17,7 @@ interface Attr {
   for: string;
 }
 
-interface IArtistResult {
+interface ILastFMArtist {
   name: string;
   listeners: string;
   mbid: string;
@@ -38,4 +38,4 @@ interface OpensearchQuery {
   startPage: string;
 }
 
-export default IArtistResult;
+export default ILastFMArtist;

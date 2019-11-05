@@ -1,37 +1,55 @@
-import React, {FC, useState} from 'react';
+import React, { FC, useState } from 'react';
 import { connect } from 'react-redux';
-import { Artist } from "../../core/store/favorites/types";
-import { Col, Container, Table} from "react-bootstrap";
-import { faExclamation } from "@fortawesome/free-solid-svg-icons";
-import SearchBar from "../../components/SearchBar";
-import EmptyTable from "../../components/EmptyTable";
-import ArtistReleasesItemContainer from "../../core/containers/ArtistReleasesItemContainer";
-import {mapDispatchToProps, mapStateToProps} from "./container";
+import { mapStateToProps, mapDispatchToProps } from './container';
+import { Button, Col, Container, Table } from 'react-bootstrap';
+import { faExclamation } from '@fortawesome/free-solid-svg-icons';
+
+import SearchBar from '../../components/SearchBar';
+import EmptyTable from '../../components/EmptyTable';
+import ArtistReleasesItem from '../../components/ArtistReleasesItem';
 
 
 interface IProps {
   handleRemoveArtist?: (name: string) => void;
-  favorites?: any[]; // TODO: Type these
+  favouriteArtists?: any[]; // TODO: Type these
+  favouriteReleases?: any[]; // TODO: Type these
 }
 
 const ArtistReleases = (artists) => {
   return (
     artists.artists.map((artist, index) => (
-      <ArtistReleasesItemContainer key={index} artist={artist} context={"Favorites"}/>
+      <ArtistReleasesItem
+        key={index}
+        item={artist}
+        canEditArtist={true}
+      />
     ))
   )
 };
 
-const Favorites: FC<IProps> = ({favorites}) => {
+const Favorites: FC<IProps> = ({ favouriteArtists, favouriteReleases }) => {
   const [loading, setLoading] = useState(false);
+
+  const tableLoadingBody = (
+    <tbody>
+    <tr>
+      <td colSpan={2}>
+        <span>Loading...</span>
+      </td>
+    </tr>
+    </tbody>
+  );
+
+  const shouldDisplayEmptyMessage: boolean = favouriteArtists.length < 1 && !loading;
 
   return (
     <Container>
       <SearchBar onClick={() => {}} onChange={() => {}} value={''}/>
 
-      {favorites.length < 1 && !loading ? (
-        <EmptyTable message={"Try searching for something"} icon={faExclamation}/>
-      ) : (
+      {shouldDisplayEmptyMessage && (
+        <EmptyTable message={'Try searching for something'} icon={faExclamation}/>
+      )}
+      {!shouldDisplayEmptyMessage && (
         <Col>
           <h1>Search Results:</h1>
 
@@ -42,16 +60,8 @@ const Favorites: FC<IProps> = ({favorites}) => {
               <th/>
             </tr>
             </thead>
-            {loading ? (
-              <tbody>
-              <tr>
-                <td colSpan={2}>
-                  <span>Loading...</span>
-                </td>
-              </tr>
-              </tbody>
-            ) : (
-              <ArtistReleases artists={favorites}/>
+            {loading ? (tableLoadingBody) : (
+              <ArtistReleases artists={favouriteArtists}/>
             )}
           </Table>
         </Col>

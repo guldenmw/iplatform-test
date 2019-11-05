@@ -1,27 +1,25 @@
-import React, { FC, useState } from 'react';
+import React, { FC } from 'react';
 import { connect } from 'react-redux';
-import { mapDispatchToProps, mapStateToProps } from './container';
 
-import { Button, Col, Container, Row, Table } from 'react-bootstrap';
+import { Col, Container, Row, Table } from "react-bootstrap";
 import { faExclamation } from '@fortawesome/free-solid-svg-icons';
 
 import SearchBar from "../../components/SearchBar";
-import ArtistItem from '../../components/ArtistItem'
 import EmptyTable from "../../components/EmptyTable";
-import Shortlist from "../../components/Shortlist";
-
-import ILastFMArtist from '../../core/store/search/lastfm/types/LastFMArtistsResults';
+import IMusicBrainzArtist from "../../core/store/search/musicbrainz/types/MusicBrainzArtistsResults";
+import { mapDispatchToProps, mapStateToProps } from "./container";
+import ArtistReleasesItem from "../../components/ArtistReleasesItem";
 
 
 interface IProps {
   isLoading?: boolean;
-  results?: ILastFMArtist[];
+  results?: IMusicBrainzArtist[];
   searchText?: string;
   searchTextChange?: (...args) => void;
   startSearch?: (searchText: string) => void;
 }
 
-const SearchArtists: FC<IProps> = (props) => {
+const SearchReleases: FC<IProps> = (props) => {
   const {
     isLoading,
     results,
@@ -29,8 +27,6 @@ const SearchArtists: FC<IProps> = (props) => {
     searchTextChange,
     startSearch
   } = props;
-
-  const [showShortlist, setShortlistVisible] = useState(false);
 
   const handleSearchStart = (event?: any) => {
     startSearch(searchText);
@@ -46,29 +42,30 @@ const SearchArtists: FC<IProps> = (props) => {
     </tbody>
   );
 
+  const ArtistReleases = (
+    results.map((item, index) => (
+      <ArtistReleasesItem
+        key={index}
+        item={item}
+        canEditArtist={false}
+      />
+    ))
+  );
+
   const showEmptyTable = !results || (results.length < 1 && !isLoading);
 
   return (
     <Container>
       <Row>
         <Col>
-          <h2>Search Artists</h2>
+          <h2>Search Releases</h2>
         </Col>
       </Row>
-
       <SearchBar
         onClick={handleSearchStart}
         onChange={searchTextChange}
         value={searchText}
       />
-
-      <Col className="d-flex justify-content-end">
-        <Button onClick={() => setShortlistVisible(!showShortlist)}>Show Shortlist</Button>
-      </Col>
-
-      {showShortlist && (
-        <Shortlist />
-      )}
 
       { showEmptyTable && (
         <EmptyTable message={'Try searching for something'} icon={faExclamation}/>
@@ -81,20 +78,14 @@ const SearchArtists: FC<IProps> = (props) => {
           <Table responsive size='md'>
             <thead>
               <tr>
-                <th/>
                 <th>Artist Name</th>
                 <th/>
               </tr>
             </thead>
-            {isLoading ? (tableLoadingBody) : (
-              <tbody>
-                {results.map((item, index) => (
-                  <ArtistItem
-                    key={index}
-                    item={item}
-                  />
-                ))}
-              </tbody>
+            {isLoading ? (
+              tableLoadingBody
+            ) : (
+              ArtistReleases
             )}
           </Table>
         </Col>
@@ -103,4 +94,4 @@ const SearchArtists: FC<IProps> = (props) => {
   )
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(SearchArtists) as typeof SearchArtists;
+export default connect(mapStateToProps, mapDispatchToProps)(SearchReleases) as typeof SearchReleases;

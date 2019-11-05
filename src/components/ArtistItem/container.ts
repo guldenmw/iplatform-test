@@ -6,7 +6,7 @@ import {
   removeShortlistItem,
 } from '../../core/store/shortlist/actions';
 
-import IArtistResult from '../../core/store/search/types';
+import ILastFMArtist from '../../core/store/search/lastfm/types/LastFMArtistsResults';
 
 // export const mapStateToProps = (state: AppState) => {
 //   return {
@@ -16,10 +16,10 @@ import IArtistResult from '../../core/store/search/types';
 
 export const mapDispatchToProps = (dispatch) => {
   return {
-    addToShortlist: (shortlistItem: IArtistResult) => {
+    addToShortlist: (shortlistItem: ILastFMArtist) => {
       dispatch(addShortlistItem(shortlistItem));
     },
-    removeFromShortlist: (shortlistItem: IArtistResult) => {
+    removeFromShortlist: (shortlistItem: ILastFMArtist) => {
       dispatch(removeShortlistItem(shortlistItem));
     },
   }

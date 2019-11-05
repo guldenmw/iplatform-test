@@ -4,15 +4,15 @@ import { Image } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 import { mapDispatchToProps } from './container';
-import IArtistResult from '../../core/store/search/types';
+import ILastFMArtistResult from '../../core/store/search/lastfm/types/LastFMArtistsResults';
 
 interface IComponentProps {
-  item: IArtistResult;
+  item: ILastFMArtistResult;
 }
 
 interface IContainerProps {
-  addToShortlist?: (shortlistItem: IArtistResult) => void;
-  removeFromShortlist?: (shortlistItem: IArtistResult) => void;
+  addToShortlist?: (shortlistItem: ILastFMArtistResult) => void;
+  removeFromShortlist?: (shortlistItem: ILastFMArtistResult) => void;
 }
 
 type IProps = IComponentProps & IContainerProps;

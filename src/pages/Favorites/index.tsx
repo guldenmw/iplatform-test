@@ -29,7 +29,7 @@ const Favorites: FC<IProps> = (props) => {
         <Col className="mt-5">
           <h1>Favorites</h1>
 
-          <Table responsive size='md'>
+          <Table responsive hover size='md'>
             <thead>
             <tr>
               <th/>

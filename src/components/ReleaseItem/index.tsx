@@ -35,7 +35,7 @@ const ReleaseItem: FC<IProps> = (props) => {
   let label: string[] = [''];
   if (labelInfo) {
     label = labelInfo.map(item => {
-      const {label} = item;
+      const { label } = item;
       if (label && label.name) {
         return label.name
       }

@@ -1,44 +1,66 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# My Music App
 
-## Available Scripts
+## Requirements
 
-In the project directory, you can run:
+For development, you will only need Node.js installed on your environement.
+All other dependencies are located in package.json.
 
-### `yarn start`
+### Node
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+#### Node installation on OS X
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+You will need to use a Terminal. On OS X, you can find the default terminal in
+`/Applications/Utilities/Terminal.app`.
 
-### `yarn test`
+Please install [Homebrew](http://brew.sh/) if it's not already done with the following command.
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+    $ ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
 
-### `yarn build`
+If everything when fine, you should run
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+    brew install node
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+#### Node installation on Linux
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+    sudo apt-get install python-software-properties
+    sudo add-apt-repository ppa:chris-lea/node.js
+    sudo apt-get update
+    sudo apt-get install nodejs
 
-### `yarn eject`
+#### Node installation on Windows
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Just go on [official Node.js website](http://nodejs.org/) & grab the installer.
+Also, be sure to have `git` available in your PATH, `npm` might need it.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+---
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+You should be able to run the following command after the installation procedure
+below.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+    $ node --version
+    v0.10.24
 
-## Learn More
+    $ npm --version
+    1.3.21
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Install
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+    $ git clone https://github.com/guldenmw/iplatform-test.git
+    $ cd iplatform-test
+    $ yarn install
+
+## Start & watch
+
+    $ yarn start
+
+## Simple build for production
+
+    $ yarn run build
+
+## Languages & tools
+
+### JavaScript
+
+- [TypeScript](https://www.typescriptlang.org/docs/home.html) is used to provide typing to Javascript.
+- [React](http://facebook.github.io/react) is used for UI.
+- [Redux](https://redux.js.org/introduction/getting-started) is used as a state manager.

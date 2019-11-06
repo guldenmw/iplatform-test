@@ -1,5 +1,4 @@
 import React, { FC } from 'react';
-import { PersistGate } from 'redux-persist/integration/react'
 import './App.css';
 import { Provider } from 'react-redux';
 import {
@@ -12,7 +11,7 @@ import {
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Navbar} from 'react-bootstrap';
 
-import { store } from './store';
+import store from './store';
 
 import SearchArtists from '../pages/SearchArtists';
 import SearchReleases from '../pages/SearchReleases';

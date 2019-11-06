@@ -33,7 +33,7 @@ const ReleasesTable: FC<IProps> = (props) => {
   return (
     <tr>
       <td colSpan={3}>
-        <Table responsive size='md'>
+        <Table responsive hover size='md'>
           <thead>
             <tr>
               <th className='table-button-header'/>

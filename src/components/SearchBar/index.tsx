@@ -20,17 +20,26 @@ const SearchBar = ({ onClick, onChange, value }: SearchBarProps) => {
     onClick(value)
   };
 
+  const handleKeyDown = (e) => {
+    console.log(e);
+    console.log(e.key);
+    if (e.key === 'Enter') {
+      onClick(value);
+    }
+  };
+
   return (
     <Col>
       <Row>
         <Col>
           <InputGroup className="mb-3">
             <FormControl
-              placeholder="Artist Name"
               aria-label="Artist Name"
               aria-describedby="basic-addon2"
-              value={value}
               onChange={handleTextChange}
+              onKeyDown={handleKeyDown}
+              placeholder="Artist Name"
+              value={value}
             />
             <InputGroup.Append>
               <InputGroup.Text id="basic-addon2" onClick={handleSearchClick} style={{ cursor: 'pointer' }}>

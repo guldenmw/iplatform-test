@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { connect } from 'react-redux';
 
-import { Col, Container, Row, Table } from 'react-bootstrap';
+import { Col, Container, Table } from 'react-bootstrap';
 import { faExclamation } from '@fortawesome/free-solid-svg-icons';
 
 import SearchBar from "../../components/SearchBar";
@@ -63,7 +63,7 @@ const SearchReleases: FC<IProps> = (props) => {
         <Col>
           <h2>Search Results:</h2>
 
-          <Table responsive size='md'>
+          <Table responsive hover size='md'>
             <thead>
               <tr>
                 <th>Artist Name</th>

@@ -2,7 +2,7 @@ import React, { FC, useState } from 'react';
 import { connect } from 'react-redux';
 import { mapDispatchToProps, mapStateToProps } from './container';
 
-import { Button, Col, Container, Row, Table } from 'react-bootstrap';
+import { Button, Col, Container, Table } from 'react-bootstrap';
 import { faExclamation } from '@fortawesome/free-solid-svg-icons';
 
 import SearchBar from "../../components/SearchBar";
@@ -55,6 +55,20 @@ const SearchArtists: FC<IProps> = (props) => {
     setShortlistVisible(!showShortlist)
   };
 
+  const shortlistButtonValue = () => {
+    if (shortlistEmpty) {
+      return 'Shortlist Empty'
+
+    } else if(showShortlist) {
+      return 'Hide Shortlist'
+
+    } else {
+      return 'Show Shortlist'
+    }
+  };
+
+  console.log(shortlistButtonValue());
+
   return (
     <Container>
       <Col className="mt-5">
@@ -72,7 +86,7 @@ const SearchArtists: FC<IProps> = (props) => {
           onClick={handleToggleShortlist}
           disabled={shortlistEmpty}
         >
-          {shortlistEmpty ? 'Shortlist Empty' : 'Show Shortlist'}
+          {shortlistButtonValue()}
         </Button>
       </Col>
 
@@ -88,7 +102,7 @@ const SearchArtists: FC<IProps> = (props) => {
         <Col>
           <h2>Search Results:</h2>
 
-          <Table responsive size='md'>
+          <Table responsive hover size='md'>
             <thead>
               <tr>
                 <th className='table-button-header'/>

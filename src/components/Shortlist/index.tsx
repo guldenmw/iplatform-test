@@ -5,10 +5,7 @@ import {
   mapDispatchToProps,
 } from './container';
 
-import {Button, Col, Row, Table} from 'react-bootstrap';
-import EmptyTable from '../EmptyTable';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeartBroken, faStar } from '@fortawesome/free-solid-svg-icons';
+import {Button, Col, Table} from 'react-bootstrap';
 import ILastFMArtist from "../../core/store/search/lastfm/types/LastFMArtistsResults";
 
 interface IProps {
@@ -43,7 +40,7 @@ const Shortlist: FC<IProps> = (props) => {
     <Col className="mt-2">
       <h1>Shortlist</h1>
 
-      <Table>
+      <Table responsive hover size='md'>
         <thead>
           <tr>
             <th>Artist</th>

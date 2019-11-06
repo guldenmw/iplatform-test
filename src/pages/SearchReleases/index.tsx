@@ -60,7 +60,7 @@ const SearchReleases: FC<IProps> = (props) => {
       )}
 
       {!showEmptyTable && (
-        <Col>
+        <Col className="mt-5">
           <h2>Search Results:</h2>
 
           <Table responsive hover size='md'>

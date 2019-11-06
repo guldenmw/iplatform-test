@@ -1,18 +1,30 @@
 import { AppState } from '../../core/store';
-import { getShortlist } from '../../core/store/shortlist/selectors';
-import { addShortlistItem } from '../../core/store/shortlist/actions';
 
 import ILastFMArtist from "../../core/store/search/lastfm/types/LastFMArtistsResults";
+import { addFavoritesArtist, removeFavoritesArtist } from "../../core/store/favorites/actions";
 
 export const mapStateToProps = (state: AppState) => {
-  const shortlist = getShortlist(state);
-  return { shortlist };
+  const {
+    favorites: {
+      artists
+    },
+    shortlist
+  } = state;
+
+  return {
+    shortlist,
+    favoriteArtists: artists
+  };
 };
 
 export const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    addArtist: (artist: ILastFMArtist) => {
-      dispatch(addShortlistItem(artist))
+    addArtistToFavorites: (artist: ILastFMArtist) => {
+      dispatch(addFavoritesArtist(artist))
+    },
+
+    removeArtistFromFavorites: (artist: ILastFMArtist) => {
+      dispatch(removeFavoritesArtist(artist))
     }
   }
 };

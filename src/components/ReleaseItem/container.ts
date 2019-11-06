@@ -1,23 +1,29 @@
 import {AppState} from "../../core/store";
 
-import {removeFavoritesRelease} from "../../core/store/favorites/actions";
+import {addFavoritesRelease, removeFavoritesRelease} from "../../core/store/favorites/actions";
 import IMusicBrainzRelease from "../../core/store/search/musicbrainz/types/MusicBrainzReleasesResults";
+import ILastFMArtist from "../../core/store/search/lastfm/types/LastFMArtistsResults";
 
 
-export const mapStateToProps = (state: AppState) => {
+export const mapStateToProps = (state: AppState, ownProps) => {
   const {
-    musicBrainz: {
+    favorites: {
       releases
     }
   } = state;
 
   return {
-    releases
+    isFavorite: releases.some(item => item.id === ownProps.item.id)
   };
 };
 
 export const mapDispatchToProps = (dispatch) => {
   return {
+
+    addToFavorites: (release: ILastFMArtist) => {
+      dispatch(addFavoritesRelease(release));
+    },
+
     removeFromFavorites: (release: IMusicBrainzRelease) => {
       dispatch(removeFavoritesRelease(release));
     }

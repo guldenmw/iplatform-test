@@ -1,7 +1,7 @@
 import {combineReducers, createStore, applyMiddleware} from "redux";
 import { persistStore, persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage' // defaults to localStorage for web
-import favorites from "./favorites/reducers";
+import favorites from "./favorites/reducer";
 import musicBrainzReducer from "./search/musicbrainz/reducer";
 import lastFMReducer from "./search/lastfm/reducer";
 import shortlist from "./shortlist/reducer";

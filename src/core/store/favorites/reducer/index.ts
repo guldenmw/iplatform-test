@@ -1,74 +1,91 @@
-import produce from 'immer';
-import IMusicBrainzArtist from '../../search/musicbrainz/types/MusicBrainzArtistsResults';
-import IMusicBrainzRelease from '../../search/musicbrainz/types/MusicBrainzReleasesResults';
-
 import {
   ADD_FAVORITES_ARTIST,
   ADD_FAVORITES_RELEASE,
   REMOVE_FAVORITES_ARTIST,
-  REMOVE_FAVORITES_RELEASE
+  REMOVE_FAVORITES_RELEASE,
+  SHOW_ARTIST_RELEASES,
+  HIDE_ARTIST_RELEASES
 } from '../actions';
 
-interface IFavouritesReducerState {
-  releases: any[];
-  artists: any[];
+import ILastFMArtist from "../../search/lastfm/types/LastFMArtistsResults";
+import IMusicBrainzRelease from '../../search/musicbrainz/types/MusicBrainzReleasesResults';
+
+
+interface IFavoritesReducerState {
+  artists: ILastFMArtist[];
+  releases: IMusicBrainzRelease[];
+  showReleases: string[];
 }
 
-const initialState: IFavouritesReducerState = {
+const initialState: IFavoritesReducerState = {
   releases: [],
   artists: [],
+  showReleases: []
 };
 
-const favouritesReducer = (state = initialState, action): IFavouritesReducerState => {
+
+const favouritesReducer = (state = initialState, action): IFavoritesReducerState => {
   const { type, data } = action;
   switch (type) {
     case ADD_FAVORITES_ARTIST: {
-      const { id, name }: IMusicBrainzArtist = data;
-      const artistStub = { id, name };
       return {
         ...state,
         artists: [
           ...state.artists,
-          artistStub,
+          data,
         ]
       }
     }
 
     case REMOVE_FAVORITES_ARTIST: {
-      const { id, name }: IMusicBrainzArtist = data;
-      const artistStub = { id, name };
       return {
         ...state,
-        artists: [
-          ...state.artists,
-          artistStub,
-        ]
+        artists: state.artists.filter(item => item.mbid !== data.mbid)
       }
     }
 
     case ADD_FAVORITES_RELEASE: {
-      const { id, title, date, 'track-count': tracks,  }: IMusicBrainzRelease = data;
-      const releaseStub = { id, title, date, tracks };
       return {
         ...state,
         releases: [
           ...state.releases,
-          releaseStub,
+          data,
         ]
       }
     }
 
     case REMOVE_FAVORITES_RELEASE: {
-      const { id, title }: IMusicBrainzRelease = data;
-      const releaseStub = { id, name };
       return {
         ...state,
-        releases: [
-          ...state.releases,
-          releaseStub,
+        releases: state.releases.filter(item => item.id !== data.id)
+      }
+    }
+
+    case SHOW_ARTIST_RELEASES: {
+      if (state.showReleases.includes(data)) {
+        return state
+      }
+
+      return {
+        ...state,
+        showReleases: [
+          ...state.showReleases,
+          data
         ]
       }
     }
+
+    case HIDE_ARTIST_RELEASES: {
+      if (!state.showReleases.includes(data)) {
+        return state
+      }
+
+      return {
+        ...state,
+        showReleases: state.showReleases.filter(item => item !== data)
+      }
+    }
+
     default:
       return state;
   }

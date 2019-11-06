@@ -1,57 +1,35 @@
-import React, { FC, useState } from 'react';
+import React, { FC } from 'react';
 import { connect } from 'react-redux';
-import { mapStateToProps, mapDispatchToProps } from './container';
-import { Button, Col, Container, Table } from 'react-bootstrap';
+import { mapStateToProps } from './container';
+import { Col, Container, Table } from 'react-bootstrap';
 import { faExclamation } from '@fortawesome/free-solid-svg-icons';
 
-import SearchBar from '../../components/SearchBar';
 import EmptyTable from '../../components/EmptyTable';
-import ArtistReleasesItem from '../../components/ArtistReleasesItem';
+import FavoritesArtistReleasesItem from '../../components/FavoritesArtistReleasesItem';
 
 
 interface IProps {
-  handleRemoveArtist?: (name: string) => void;
-  favouriteArtists?: any[]; // TODO: Type these
-  favouriteReleases?: any[]; // TODO: Type these
+  favoriteArtists?: any[];
 }
 
-const ArtistReleases = (artists) => {
-  return (
-    artists.artists.map((artist, index) => (
-      <ArtistReleasesItem
-        key={index}
-        item={artist}
-        canEditArtist={true}
-      />
-    ))
-  )
-};
+const Favorites: FC<IProps> = (props) => {
+  const {
+    favoriteArtists,
+  } = props;
 
-const Favorites: FC<IProps> = ({ favouriteArtists, favouriteReleases }) => {
-  const [loading, setLoading] = useState(false);
+  console.log(favoriteArtists);
 
-  const tableLoadingBody = (
-    <tbody>
-    <tr>
-      <td colSpan={2}>
-        <span>Loading...</span>
-      </td>
-    </tr>
-    </tbody>
-  );
-
-  const shouldDisplayEmptyMessage: boolean = favouriteArtists.length < 1 && !loading;
+  const shouldDisplayEmptyMessage: boolean = !favoriteArtists || favoriteArtists.length < 1;
 
   return (
     <Container>
-      <SearchBar onClick={() => {}} onChange={() => {}} value={''}/>
-
       {shouldDisplayEmptyMessage && (
-        <EmptyTable message={'Try searching for something'} icon={faExclamation}/>
+        <EmptyTable message={'You have no favorites yet'} icon={faExclamation}/>
       )}
+
       {!shouldDisplayEmptyMessage && (
         <Col>
-          <h1>Search Results:</h1>
+          <h1>Favorites</h1>
 
           <Table responsive size='md'>
             <thead>
@@ -60,9 +38,12 @@ const Favorites: FC<IProps> = ({ favouriteArtists, favouriteReleases }) => {
               <th/>
             </tr>
             </thead>
-            {loading ? (tableLoadingBody) : (
-              <ArtistReleases artists={favouriteArtists}/>
-            )}
+            {favoriteArtists.map((artist, index) => (
+              <FavoritesArtistReleasesItem
+                key={index}
+                item={artist}
+              />
+            ))}
           </Table>
         </Col>
       )}
@@ -72,5 +53,5 @@ const Favorites: FC<IProps> = ({ favouriteArtists, favouriteReleases }) => {
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  null
 )(Favorites) as typeof Favorites;

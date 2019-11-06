@@ -1,25 +1,22 @@
-import React, {FC, useState} from 'react';
+import React, { FC } from 'react';
 import { connect } from 'react-redux';
 import {Button} from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMinusCircle } from '@fortawesome/free-solid-svg-icons';
-import { mapDispatchToProps } from './container';
+import { mapStateToProps, mapDispatchToProps } from './container';
 import IMusicBrainzArtist from "../../core/store/search/musicbrainz/types/MusicBrainzArtistsResults";
 import ReleasesTable from "../ReleasesTable";
 import IMusicBrainzRelease from "../../core/store/search/musicbrainz/types/MusicBrainzReleasesResults";
-import {hideArtistReleases} from "../../core/store/search/musicbrainz/actions";
 
 
 interface IComponentProps {
   item: IMusicBrainzArtist;
   releases?: IMusicBrainzRelease[];
   showReleases?: string[];
-  canEditArtist: boolean;
 }
 
 interface IContainerProps {
   removeFromFavorites?: (artist: IMusicBrainzArtist) => void;
-  getReleases?: (artistId: string) => void;
   showArtistReleases?: (artistId: string) => void;
   hideArtistReleases?: (artistId: string) => void;
 }
@@ -27,25 +24,29 @@ interface IContainerProps {
 type IProps = IComponentProps & IContainerProps;
 
 
-const ArtistReleasesItem: FC<IProps> = (props) => {
+const FavoritesArtistReleasesItem: FC<IProps> = (props) => {
   const {
     item,
     releases,
     showReleases,
-    canEditArtist,
     removeFromFavorites,
-    getReleases,
     showArtistReleases,
     hideArtistReleases
   } = props;
 
-  console.log(showReleases);
-
   const { name, id } = item;
-  const displayReleases = showReleases.includes(id);
+
+  let artistReleases = [];
+
+  if (releases) {
+    artistReleases = releases.filter(item => {
+      return item["artist-credit"][0].artist.name === name
+    })
+  }
+
+  const displayReleases = showReleases && showReleases.includes(id);
 
   const handleToggleReleases = async (event) => {
-    getReleases(id);
     displayReleases ? hideArtistReleases(id) : showArtistReleases(id);
   };
 
@@ -56,11 +57,9 @@ const ArtistReleasesItem: FC<IProps> = (props) => {
   return (
     <tbody>
       <tr>
-        {canEditArtist && (
-          <td>
-            <FontAwesomeIcon icon={faMinusCircle} onClick={handleRemoveArtist}/>
-          </td>
-        )}
+        <td>
+          <FontAwesomeIcon icon={faMinusCircle} onClick={handleRemoveArtist}/>
+        </td>
 
         <td>{name}</td>
         <td>
@@ -70,16 +69,12 @@ const ArtistReleasesItem: FC<IProps> = (props) => {
         </td>
       </tr>
 
-      {displayReleases && <ReleasesTable releases={releases}/>}
+      {displayReleases && <ReleasesTable releases={artistReleases}/>}
     </tbody>
   )
 };
 
-ArtistReleasesItem.defaultProps = {
-  canEditArtist: false
-};
-
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
-)(ArtistReleasesItem) as typeof ArtistReleasesItem;
+)(FavoritesArtistReleasesItem) as typeof FavoritesArtistReleasesItem;

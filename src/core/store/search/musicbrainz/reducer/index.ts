@@ -15,7 +15,6 @@ interface ISearchReducer {
     searchText: string;
     results: ILastFMArtist[];
     isLoading: boolean;
-    showReleases: any[];
   };
 
   releases: {
@@ -23,6 +22,8 @@ interface ISearchReducer {
     results: any[];
     isLoading: boolean;
   };
+
+  showReleases: any[];
 }
 
 const initialState: ISearchReducer = {
@@ -30,14 +31,15 @@ const initialState: ISearchReducer = {
     searchText: '',
     results: [],
     isLoading: false,
-    showReleases: []
   },
 
   releases: {
     searchText: '',
     results: [],
     isLoading: false
-  }
+  },
+
+  showReleases: []
 };
 
 const musicBrainzReducer = (state: ISearchReducer = initialState, action): ISearchReducer => {
@@ -89,40 +91,37 @@ const musicBrainzReducer = (state: ISearchReducer = initialState, action): ISear
         ...state,
         releases: {
           ...state.releases,
-          results: data,
+          results: [
+            ...state.releases.results,
+            ...data
+          ],
           isLoading: false
         }
       }
     }
 
     case SHOW_ARTIST_RELEASES: {
-      if (state.artists.showReleases.includes(data)) {
+      if (state.showReleases.includes(data)) {
         return state
       }
 
       return {
         ...state,
-        artists: {
-          ...state.artists,
-          showReleases: [
-            ...state.artists.showReleases,
-            data
-          ]
-        }
+        showReleases: [
+          ...state.showReleases,
+          data
+        ]
       }
     }
 
     case HIDE_ARTIST_RELEASES: {
-      if (!state.artists.showReleases.includes(data)) {
+      if (!state.showReleases.includes(data)) {
         return state
       }
 
       return {
         ...state,
-        artists: {
-          ...state.artists,
-          showReleases: state.artists.showReleases.filter(item => item !== data)
-        }
+        showReleases: state.showReleases.filter(item => item !== data)
       }
     }
 

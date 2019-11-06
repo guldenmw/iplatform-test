@@ -1,25 +1,27 @@
-import React, { FC, useState } from "react";
+import React, { FC } from "react";
 import { connect } from 'react-redux';
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faStar} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faStar } from "@fortawesome/free-solid-svg-icons";
 import IMusicBrainzRelease from "../../core/store/search/musicbrainz/types/MusicBrainzReleasesResults";
-import {mapDispatchToProps} from "../ArtistReleasesItem/container";
+import { mapStateToProps, mapDispatchToProps } from "./container";
 
 interface IComponentProps {
   item: IMusicBrainzRelease;
+  isFavorite?: boolean;
 }
 
 interface IContainerProps {
+  addToFavorites?: (release: IMusicBrainzRelease) => void;
   removeFromFavorites?: (release: IMusicBrainzRelease) => void;
 }
 
 type IProps = IComponentProps & IContainerProps;
 
 const ReleaseItem: FC<IProps> = (props) => {
-  const [favorite, toggleFavorite] = useState(false);
-
   const {
     item,
+    isFavorite,
+    addToFavorites,
     removeFromFavorites
   } = props;
 
@@ -30,25 +32,40 @@ const ReleaseItem: FC<IProps> = (props) => {
     'track-count': tracks
   } = item;
 
-  const handleRemoveFromFavorites = (event) => {
-    removeFromFavorites(item);
-    toggleFavorite(!favorite);
+  let label: string[] = [''];
+  if (labelInfo) {
+    label = labelInfo.map(item => {
+      const {label} = item;
+      if (label && label.name) {
+        return label.name
+      }
+    });
+  }
+  console.log("Is favorite: ", isFavorite);
+
+  const handleFavoritesUpdate = (event) => {
+    if (isFavorite) {
+      removeFromFavorites(item);
+
+    } else {
+      addToFavorites(item)
+    }
   };
 
   return (
     <tr>
       <td>
-        <FontAwesomeIcon icon={faStar} onClick={handleRemoveFromFavorites} className={favorite ? 'text-primary' : 'text-secondary'}/>
+        <FontAwesomeIcon icon={faStar} onClick={handleFavoritesUpdate} className={isFavorite ? 'text-primary' : 'text-secondary'}/>
       </td>
       <td>{date}</td>
       <td>{title}</td>
-      <td>{labelInfo.map(item => item.label)}</td>
+      <td>{label.join(', ')}</td>
       <td>{tracks}</td>
     </tr>
   )
 };
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(ReleaseItem) as typeof ReleaseItem;

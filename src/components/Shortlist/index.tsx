@@ -13,12 +13,30 @@ import ILastFMArtist from "../../core/store/search/lastfm/types/LastFMArtistsRes
 
 interface IProps {
   shortlist?: ILastFMArtist[];
-  addArtist?: (artist: ILastFMArtist) => void;
+  favoriteArtists?: ILastFMArtist[];
+  addArtistToFavorites?: (artist: ILastFMArtist) => void;
+  removeArtistFromFavorites?: (artist: ILastFMArtist) => void;
 }
 
-const Shortlist: FC<IProps> = ({ shortlist, addArtist }) => {
-  const handleAddArtist = (artist: ILastFMArtist) => (event) => {
-    addArtist(artist);
+const Shortlist: FC<IProps> = (props) => {
+  const {
+    shortlist,
+    favoriteArtists,
+    addArtistToFavorites,
+    removeArtistFromFavorites
+  } = props;
+
+  const isFavorite = (artistId: string) => {
+    return favoriteArtists.some(item => item.mbid === artistId);
+  };
+
+  const handleUpdateFavorites = (artist: ILastFMArtist) => (event) => {
+    if (isFavorite(artist.mbid)) {
+      removeArtistFromFavorites(artist)
+
+    } else {
+      addArtistToFavorites(artist);
+    }
   };
 
   return (
@@ -38,8 +56,13 @@ const Shortlist: FC<IProps> = ({ shortlist, addArtist }) => {
             {shortlist.map((artist, index) => (
               <tr key={index}>
                 <td>
-                  <FontAwesomeIcon icon={faStar} onClick={handleAddArtist(artist)} />
+                  <FontAwesomeIcon
+                    icon={faStar}
+                    onClick={handleUpdateFavorites(artist)}
+                    className={isFavorite(artist.mbid) ? 'text-primary' : 'text-secondary'}
+                  />
                 </td>
+
                 <td>
                   {artist.name}
                 </td>

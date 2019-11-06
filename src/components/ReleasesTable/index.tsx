@@ -1,18 +1,27 @@
 import React, {FC} from 'react';
 import { connect } from 'react-redux';
-import {Table} from "react-bootstrap";
+import { Table } from "react-bootstrap";
 import IMusicBrainzRelease from "../../core/store/search/musicbrainz/types/MusicBrainzReleasesResults";
-import ReleaseItem from '../ReleaseItem'
-import {mapDispatchToProps} from "../ArtistReleasesItem/container";
+import ReleaseItem from '../ReleaseItem';
+import { mapStateToProps } from "./container";
 
 
 interface IProps {
-  releases: IMusicBrainzRelease[];
+  releases?: IMusicBrainzRelease[];
+  isLoading?: boolean;
 }
 
 
 const ReleasesTable: FC<IProps> = (props) => {
-  const { releases } = props;
+  const { releases, isLoading } = props;
+
+  const tableLoadingBody = (
+    <tr>
+      <td colSpan={2}>
+        <span>Loading...</span>
+      </td>
+    </tr>
+  );
 
   return (
     <tr>
@@ -28,9 +37,14 @@ const ReleasesTable: FC<IProps> = (props) => {
             </tr>
           </thead>
           <tbody>
-            {releases.map((release, index) => (
+          {isLoading ? (
+            tableLoadingBody
+          ) : (
+            releases.map((release, index) => (
               <ReleaseItem key={index} item={release}/>
-            ))}
+            ))
+          )}
+
           </tbody>
         </Table>
       </td>
@@ -39,6 +53,6 @@ const ReleasesTable: FC<IProps> = (props) => {
 };
 
 export default connect(
-  null,
-  mapDispatchToProps
+  mapStateToProps,
+  null
 )(ReleasesTable) as typeof ReleasesTable;

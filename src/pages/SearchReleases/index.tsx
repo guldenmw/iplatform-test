@@ -8,7 +8,7 @@ import SearchBar from "../../components/SearchBar";
 import EmptyTable from "../../components/EmptyTable";
 import IMusicBrainzArtist from "../../core/store/search/musicbrainz/types/MusicBrainzArtistsResults";
 import { mapDispatchToProps, mapStateToProps } from "./container";
-import ArtistReleasesItem from "../../components/ArtistReleasesItem";
+import SearchArtistReleasesItem from "../../components/SearchArtistReleasesItem";
 
 
 interface IProps {
@@ -40,16 +40,6 @@ const SearchReleases: FC<IProps> = (props) => {
       </td>
     </tr>
     </tbody>
-  );
-
-  const ArtistReleases = (
-    results.map((item, index) => (
-      <ArtistReleasesItem
-        key={index}
-        item={item}
-        canEditArtist={false}
-      />
-    ))
   );
 
   const showEmptyTable = !results || (results.length < 1 && !isLoading);
@@ -85,7 +75,12 @@ const SearchReleases: FC<IProps> = (props) => {
             {isLoading ? (
               tableLoadingBody
             ) : (
-              ArtistReleases
+              results.map((item, index) => (
+                <SearchArtistReleasesItem
+                  key={index}
+                  item={item}
+                />
+              ))
             )}
           </Table>
         </Col>

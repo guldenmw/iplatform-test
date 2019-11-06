@@ -11,28 +11,39 @@ import ILastFMArtist from "../../search/lastfm/types/LastFMArtistsResults";
 import IMusicBrainzRelease from '../../search/musicbrainz/types/MusicBrainzReleasesResults';
 
 
+interface IFavoritesArtist {
+  name: string;
+  mbid: string;
+}
+
 interface IFavoritesReducerState {
-  artists: ILastFMArtist[];
+  artists: IFavoritesArtist[];
   releases: IMusicBrainzRelease[];
   showReleases: string[];
+  isLoading: string[];
 }
 
 const initialState: IFavoritesReducerState = {
   releases: [],
   artists: [],
-  showReleases: []
+  showReleases: [],
+  isLoading: []
 };
 
 
 const favouritesReducer = (state = initialState, action): IFavoritesReducerState => {
   const { type, data } = action;
   switch (type) {
+
     case ADD_FAVORITES_ARTIST: {
+      const { mbid, name }: ILastFMArtist = data;
+      const artistStub = { mbid, name };
+
       return {
         ...state,
         artists: [
           ...state.artists,
-          data,
+          artistStub,
         ]
       }
     }
@@ -45,6 +56,27 @@ const favouritesReducer = (state = initialState, action): IFavoritesReducerState
     }
 
     case ADD_FAVORITES_RELEASE: {
+      const artist = {
+        name: data['artist-credit'][0].artist.name,
+        mbid: data['artist-credit'][0].artist.id,
+      };
+
+      let artistExist = state.artists.some(item => item.mbid === artist.mbid);
+
+      if (!artistExist) {
+        return {
+          ...state,
+          artists: [
+            ...state.artists,
+            artist
+          ],
+          releases: [
+            ...state.releases,
+            data,
+          ]
+        }
+      }
+
       return {
         ...state,
         releases: [

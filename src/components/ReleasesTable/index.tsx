@@ -7,13 +7,20 @@ import { mapStateToProps } from "./container";
 
 
 interface IProps {
+  artistId: string;
   releases?: IMusicBrainzRelease[];
-  isLoading?: boolean;
+  isLoading?: string[];
 }
 
 
 const ReleasesTable: FC<IProps> = (props) => {
-  const { releases, isLoading } = props;
+  const {
+    artistId,
+    releases,
+    isLoading
+  } = props;
+
+  const isLoadingByArtist = isLoading.some(item => item === artistId);
 
   const tableLoadingBody = (
     <tr>
@@ -37,7 +44,7 @@ const ReleasesTable: FC<IProps> = (props) => {
             </tr>
           </thead>
           <tbody>
-          {isLoading ? (
+          {isLoadingByArtist ? (
             tableLoadingBody
           ) : (
             releases.map((release, index) => (

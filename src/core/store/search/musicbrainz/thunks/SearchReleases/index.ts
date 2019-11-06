@@ -3,11 +3,14 @@ import fetchMusicBrainzReleases from '../../api/SearchMusicBrainzReleases';
 
 const searchReleases = (searchText: string) => {
   return async (dispatch, getState) => {
-    dispatch(releasesSearchStart()); // This will set your loading state
+    dispatch(releasesSearchStart(searchText)); // This will set your loading state
 
     try {
       const releasesResults = await fetchMusicBrainzReleases(searchText);
-      dispatch(releasesSearchSuccess(releasesResults));
+      dispatch(releasesSearchSuccess({
+        artistId: searchText,
+        results: releasesResults
+      }));
 
     } catch (ex) {
       console.error(ex);

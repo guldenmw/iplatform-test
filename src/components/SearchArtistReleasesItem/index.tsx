@@ -38,7 +38,6 @@ const SearchArtistReleasesItem: FC<IProps> = (props) => {
 
   if (releases) {
     artistReleases = releases.filter(item => {
-      console.log(item);
       return item["artist-credit"][0].artist.name === name
     });
   }
@@ -61,7 +60,7 @@ const SearchArtistReleasesItem: FC<IProps> = (props) => {
         </td>
       </tr>
 
-      {displayReleases && <ReleasesTable releases={artistReleases}/>}
+      {displayReleases && <ReleasesTable releases={artistReleases} artistId={id}/>}
     </tbody>
   )
 };

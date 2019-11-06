@@ -41,7 +41,6 @@ const ReleaseItem: FC<IProps> = (props) => {
       }
     });
   }
-  console.log("Is favorite: ", isFavorite);
 
   const handleFavoritesUpdate = (event) => {
     if (isFavorite) {

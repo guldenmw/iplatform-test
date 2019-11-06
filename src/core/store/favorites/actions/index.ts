@@ -1,3 +1,5 @@
+import IMusicBrainzRelease from "../../search/musicbrainz/types/MusicBrainzReleasesResults";
+
 export const ADD_FAVORITES_ARTIST = 'ADD_FAVORITES_ARTIST';
 export const REMOVE_FAVORITES_ARTIST = 'REMOVE_FAVORITES_ARTIST';
 
@@ -16,11 +18,11 @@ export const removeFavoritesArtist = (data?: any) => ({
   type: REMOVE_FAVORITES_ARTIST, data,
 });
 
-export const addFavoritesRelease = (data?: any) => ({
+export const addFavoritesRelease = (data?: IMusicBrainzRelease) => ({
   type: ADD_FAVORITES_RELEASE, data,
 });
 
-export const removeFavoritesRelease = (data?: any) => ({
+export const removeFavoritesRelease = (data?: IMusicBrainzRelease) => ({
   type: REMOVE_FAVORITES_RELEASE, data,
 });
 

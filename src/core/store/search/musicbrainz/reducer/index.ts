@@ -20,7 +20,7 @@ interface ISearchReducer {
   releases: {
     searchText: string;
     results: any[];
-    isLoading: boolean;
+    isLoading: string[];
   };
 
   showReleases: any[];
@@ -36,7 +36,7 @@ const initialState: ISearchReducer = {
   releases: {
     searchText: '',
     results: [],
-    isLoading: false
+    isLoading: []
   },
 
   showReleases: []
@@ -81,7 +81,10 @@ const musicBrainzReducer = (state: ISearchReducer = initialState, action): ISear
         ...state,
         releases: {
           ...state.releases,
-          isLoading: true
+          isLoading: [
+            ...state.releases.isLoading,
+            data
+          ]
         }
       }
     }
@@ -93,9 +96,9 @@ const musicBrainzReducer = (state: ISearchReducer = initialState, action): ISear
           ...state.releases,
           results: [
             ...state.releases.results,
-            ...data
+            ...data.results
           ],
-          isLoading: false
+          isLoading: state.releases.isLoading.filter(item => item !== data.artistId)
         }
       }
     }

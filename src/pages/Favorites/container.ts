@@ -7,7 +7,6 @@ export const mapStateToProps = (state: AppState) => {
       artists
     }
   } = state;
-  console.log(artists);
 
   return {
     favoriteArtists: artists

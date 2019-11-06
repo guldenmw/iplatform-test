@@ -2,7 +2,6 @@ import {AppState} from "../../core/store";
 
 import {addFavoritesRelease, removeFavoritesRelease} from "../../core/store/favorites/actions";
 import IMusicBrainzRelease from "../../core/store/search/musicbrainz/types/MusicBrainzReleasesResults";
-import ILastFMArtist from "../../core/store/search/lastfm/types/LastFMArtistsResults";
 
 
 export const mapStateToProps = (state: AppState, ownProps) => {
@@ -20,7 +19,7 @@ export const mapStateToProps = (state: AppState, ownProps) => {
 export const mapDispatchToProps = (dispatch) => {
   return {
 
-    addToFavorites: (release: ILastFMArtist) => {
+    addToFavorites: (release: IMusicBrainzRelease) => {
       dispatch(addFavoritesRelease(release));
     },
 

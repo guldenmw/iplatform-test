@@ -17,8 +17,6 @@ const Favorites: FC<IProps> = (props) => {
     favoriteArtists,
   } = props;
 
-  console.log(favoriteArtists);
-
   const shouldDisplayEmptyMessage: boolean = !favoriteArtists || favoriteArtists.length < 1;
 
   return (

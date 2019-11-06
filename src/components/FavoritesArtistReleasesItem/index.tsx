@@ -69,7 +69,7 @@ const FavoritesArtistReleasesItem: FC<IProps> = (props) => {
         </td>
       </tr>
 
-      {displayReleases && <ReleasesTable releases={artistReleases}/>}
+      {displayReleases && <ReleasesTable releases={artistReleases} artistId={id}/>}
     </tbody>
   )
 };

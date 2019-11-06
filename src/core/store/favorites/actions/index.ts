@@ -1,4 +1,4 @@
-import IMusicBrainzRelease from "../../search/musicbrainz/types/MusicBrainzReleasesResults";
+import IMusicBrainzRelease from '../../search/musicbrainz/types/MusicBrainzReleasesResults';
 
 export const ADD_FAVORITES_ARTIST = 'ADD_FAVORITES_ARTIST';
 export const REMOVE_FAVORITES_ARTIST = 'REMOVE_FAVORITES_ARTIST';

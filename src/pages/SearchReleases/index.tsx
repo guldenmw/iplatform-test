@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { connect } from 'react-redux';
 
-import { Col, Container, Row, Table } from "react-bootstrap";
+import { Col, Container, Row, Table } from 'react-bootstrap';
 import { faExclamation } from '@fortawesome/free-solid-svg-icons';
 
 import SearchBar from "../../components/SearchBar";

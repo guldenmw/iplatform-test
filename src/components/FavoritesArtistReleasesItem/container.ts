@@ -1,12 +1,12 @@
-import {AppState} from "../../core/store";
+import {AppState} from '../../core/store';
 
 import {
   removeFavoritesArtist,
   hideFavoritesReleases,
   showFavoritesReleases
-} from "../../core/store/favorites/actions";
+} from '../../core/store/favorites/actions';
 
-import {IFavoritesArtist} from "../../core/store/favorites/types";
+import {IFavoritesArtist} from '../../core/store/favorites/types';
 
 
 export const mapStateToProps = (state: AppState) => {
@@ -32,12 +32,10 @@ export const mapDispatchToProps = (dispatch) => {
     },
 
     showFavoritesReleases: (artistId: string) => {
-      console.log(artistId);
       dispatch(showFavoritesReleases(artistId))
     },
 
     hideFavoritesReleases: (artistId: string) => {
-      console.log(artistId);
       dispatch(hideFavoritesReleases(artistId))
     }
   }

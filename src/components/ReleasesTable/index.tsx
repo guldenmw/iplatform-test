@@ -1,9 +1,9 @@
 import React, {FC} from 'react';
 import { connect } from 'react-redux';
-import { Table } from "react-bootstrap";
-import IMusicBrainzRelease from "../../core/store/search/musicbrainz/types/MusicBrainzReleasesResults";
+import { Table } from 'react-bootstrap';
+import IMusicBrainzRelease from '../../core/store/search/musicbrainz/types/MusicBrainzReleasesResults';
 import ReleaseItem from '../ReleaseItem';
-import { mapStateToProps } from "./container";
+import { mapStateToProps } from './container';
 
 
 interface IProps {

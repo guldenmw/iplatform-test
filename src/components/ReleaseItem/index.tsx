@@ -1,9 +1,9 @@
-import React, { FC } from "react";
+import React, { FC } from 'react';
 import { connect } from 'react-redux';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar } from "@fortawesome/free-solid-svg-icons";
-import IMusicBrainzRelease from "../../core/store/search/musicbrainz/types/MusicBrainzReleasesResults";
-import { mapStateToProps, mapDispatchToProps } from "./container";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faStar } from '@fortawesome/free-solid-svg-icons';
+import IMusicBrainzRelease from '../../core/store/search/musicbrainz/types/MusicBrainzReleasesResults';
+import { mapStateToProps, mapDispatchToProps } from './container';
 
 interface IComponentProps {
   item: IMusicBrainzRelease;

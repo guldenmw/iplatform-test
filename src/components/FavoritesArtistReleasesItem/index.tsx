@@ -4,9 +4,9 @@ import {Button} from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMinusCircle } from '@fortawesome/free-solid-svg-icons';
 import { mapStateToProps, mapDispatchToProps } from './container';
-import ReleasesTable from "../ReleasesTable";
-import IMusicBrainzRelease from "../../core/store/search/musicbrainz/types/MusicBrainzReleasesResults";
-import {IFavoritesArtist} from "../../core/store/favorites/types";
+import ReleasesTable from '../ReleasesTable';
+import IMusicBrainzRelease from '../../core/store/search/musicbrainz/types/MusicBrainzReleasesResults';
+import {IFavoritesArtist} from '../../core/store/favorites/types';
 
 
 interface IComponentProps {
@@ -40,7 +40,7 @@ const FavoritesArtistReleasesItem: FC<IProps> = (props) => {
 
   if (releases) {
     artistReleases = releases.filter(item => {
-      return item["artist-credit"][0].artist.name === name
+      return item['artist-credit'][0].artist.name === name
     })
   }
 
@@ -62,14 +62,14 @@ const FavoritesArtistReleasesItem: FC<IProps> = (props) => {
   return (
     <>
       <tr>
-        <td className="table-start-button">
+        <td className='table-start-button'>
           <FontAwesomeIcon icon={faMinusCircle} onClick={handleRemoveArtist}/>
         </td>
 
         <td>{name}</td>
-        <td className="d-flex justify-content-end">
+        <td className='d-flex justify-content-end'>
           <Button onClick={handleToggleReleases}>
-            {displayReleases ? "Hide Releases" : "Show Releases"}
+            {displayReleases ? 'Hide Releases' : 'Show Releases'}
           </Button>
         </td>
       </tr>

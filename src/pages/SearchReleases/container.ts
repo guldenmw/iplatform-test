@@ -1,7 +1,7 @@
-import {AppState} from "../../core/store";
+import {AppState} from '../../core/store';
 import { artistsReleasesSearchTextChange } from '../../core/store/search/musicbrainz/actions';
 
-import searchReleasesArtists from "../../core/store/search/musicbrainz/thunks/SearchArtists";
+import searchReleasesArtists from '../../core/store/search/musicbrainz/thunks/SearchArtists';
 
 export const mapStateToProps = (state: AppState) => {
   const {

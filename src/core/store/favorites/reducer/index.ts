@@ -7,12 +7,12 @@ import {
   HIDE_FAVORITE_RELEASES
 } from '../actions';
 
-import ILastFMArtist from "../../search/lastfm/types/LastFMArtistsResults";
+import ILastFMArtist from '../../search/lastfm/types/LastFMArtistsResults';
 import IMusicBrainzRelease from '../../search/musicbrainz/types/MusicBrainzReleasesResults';
-import {IFavoritesArtist} from "../types";
+import {IFavoritesArtist} from '../types';
 
 
-interface IFavoritesReducerState {
+export interface IFavoritesReducerState {
   artists: IFavoritesArtist[];
   releases: IMusicBrainzRelease[];
   showReleases: string[];
@@ -90,7 +90,6 @@ const favouritesReducer = (state = initialState, action): IFavoritesReducerState
     }
 
     case SHOW_FAVORITE_RELEASES: {
-      console.log(data);
       if (state.showReleases.includes(data)) {
         return state
       }

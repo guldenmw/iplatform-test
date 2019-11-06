@@ -24,12 +24,12 @@ const App: FC = () => {
     <Provider store={store}>
       {/*<PersistGate loading={null} persistor={persistor}>*/}
         <Router>
-          <Navbar bg="dark">
+          <Navbar bg="primary">
             <Navbar.Toggle aria-controls="basic-navbar-nav"/>
             <Navbar.Collapse>
-              <Link to="/my_artists">My Artists</Link>
-              <Link to="/search_artists">Search Artists</Link>
-              <Link to="/search_releases">Search Releases</Link>
+              <Link className={'text-white font-weight-bold mx-2 my-2'} to="/my_artists">My Artists</Link>
+              <Link className={'text-white font-weight-bold mx-2 my-2'} to="/search_artists">Search Artists</Link>
+              <Link className={'text-white font-weight-bold mx-2 my-2'} to="/search_releases">Search Releases</Link>
             </Navbar.Collapse>
           </Navbar>
 

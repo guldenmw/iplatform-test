@@ -26,22 +26,25 @@ const Favorites: FC<IProps> = (props) => {
       )}
 
       {!shouldDisplayEmptyMessage && (
-        <Col>
+        <Col className="mt-5">
           <h1>Favorites</h1>
 
           <Table responsive size='md'>
             <thead>
             <tr>
+              <th/>
               <th>Artist Name</th>
               <th/>
             </tr>
             </thead>
-            {favoriteArtists.map((item, index) => (
-              <FavoritesArtistReleasesItem
-                key={index}
-                item={item}
-              />
-            ))}
+            <tbody>
+              {favoriteArtists.map((item, index) => (
+                <FavoritesArtistReleasesItem
+                  key={index}
+                  item={item}
+                />
+              ))}
+            </tbody>
           </Table>
         </Col>
       )}

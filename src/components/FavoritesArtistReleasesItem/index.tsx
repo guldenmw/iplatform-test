@@ -60,14 +60,14 @@ const FavoritesArtistReleasesItem: FC<IProps> = (props) => {
   };
 
   return (
-    <tbody>
+    <>
       <tr>
-        <td>
+        <td className="table-start-button">
           <FontAwesomeIcon icon={faMinusCircle} onClick={handleRemoveArtist}/>
         </td>
 
         <td>{name}</td>
-        <td>
+        <td className="d-flex justify-content-end">
           <Button onClick={handleToggleReleases}>
             {displayReleases ? "Hide Releases" : "Show Releases"}
           </Button>
@@ -81,7 +81,7 @@ const FavoritesArtistReleasesItem: FC<IProps> = (props) => {
         />
       )
       }
-    </tbody>
+    </>
   )
 };
 

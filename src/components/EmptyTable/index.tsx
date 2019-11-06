@@ -9,7 +9,7 @@ interface EmptyTable {
 }
 
 const EmptyTable: FC<EmptyTable> = ({message, icon}) => (
-  <Col className="d-flex flex-column justify-content-center align-items-center">
+  <Col className="d-flex flex-column justify-content-center align-items-center text-muted my-5">
     <Row>
       <Col>
         <FontAwesomeIcon icon={icon}/>

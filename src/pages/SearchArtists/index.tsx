@@ -16,6 +16,7 @@ import ILastFMArtist from '../../core/store/search/lastfm/types/LastFMArtistsRes
 interface IProps {
   isLoading?: boolean;
   results?: ILastFMArtist[];
+  shortlist?: ILastFMArtist[];
   searchText?: string;
   searchTextChange?: (...args) => void;
   startSearch?: (searchText: string) => void;
@@ -25,12 +26,14 @@ const SearchArtists: FC<IProps> = (props) => {
   const {
     isLoading,
     results,
+    shortlist,
     searchText,
     searchTextChange,
     startSearch
   } = props;
 
   const [showShortlist, setShortlistVisible] = useState(false);
+  const shortlistEmpty = shortlist.length < 1;
 
   const handleSearchStart = (event?: any) => {
     startSearch(searchText);
@@ -48,13 +51,15 @@ const SearchArtists: FC<IProps> = (props) => {
 
   const showEmptyTable = !results || (results.length < 1 && !isLoading);
 
+  const handleToggleShortlist = (event) => {
+    setShortlistVisible(!showShortlist)
+  };
+
   return (
     <Container>
-      <Row>
-        <Col>
-          <h2>Search Artists</h2>
-        </Col>
-      </Row>
+      <Col className="mt-5">
+        <h1>Search Artists</h1>
+      </Col>
 
       <SearchBar
         onClick={handleSearchStart}
@@ -63,7 +68,12 @@ const SearchArtists: FC<IProps> = (props) => {
       />
 
       <Col className="d-flex justify-content-end">
-        <Button onClick={() => setShortlistVisible(!showShortlist)}>Show Shortlist</Button>
+        <Button
+          onClick={handleToggleShortlist}
+          disabled={shortlistEmpty}
+        >
+          {shortlistEmpty ? 'Shortlist Empty' : 'Show Shortlist'}
+        </Button>
       </Col>
 
       {showShortlist && (
@@ -76,12 +86,12 @@ const SearchArtists: FC<IProps> = (props) => {
 
       {!showEmptyTable && (
         <Col>
-          <h1>Search Results:</h1>
+          <h2>Search Results:</h2>
 
           <Table responsive size='md'>
             <thead>
               <tr>
-                <th/>
+                <th className='table-button-header'/>
                 <th>Artist Name</th>
                 <th/>
               </tr>

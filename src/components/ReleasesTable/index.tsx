@@ -36,7 +36,7 @@ const ReleasesTable: FC<IProps> = (props) => {
         <Table responsive size='md'>
           <thead>
             <tr>
-              <th/>
+              <th className='table-button-header'/>
               <th>Year</th>
               <th>Title</th>
               <th>Release Label</th>

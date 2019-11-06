@@ -9,13 +9,15 @@ export const mapStateToProps = (state: AppState) => {
       isLoading,
       results,
       searchText,
-    }
+    },
+    shortlist
   } = state;
 
   return {
     isLoading,
     results,
     searchText,
+    shortlist
   };
 };
 

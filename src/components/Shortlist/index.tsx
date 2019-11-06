@@ -5,7 +5,7 @@ import {
   mapDispatchToProps,
 } from './container';
 
-import { Col, Row, Table } from 'react-bootstrap';
+import {Button, Col, Row, Table} from 'react-bootstrap';
 import EmptyTable from '../EmptyTable';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeartBroken, faStar } from '@fortawesome/free-solid-svg-icons';
@@ -40,39 +40,36 @@ const Shortlist: FC<IProps> = (props) => {
   };
 
   return (
-    <Row className="d-flex justify-content-center">
-      <Col sm={6}>
-        {shortlist.length < 1 ? (
-          <EmptyTable message="You haven't added any artists to your shortlist." icon={faHeartBroken}/>
-        ) : (
-          <Table size='sm'>
-            <thead>
-            <tr>
-              <th/>
-              <th>Artist</th>
-            </tr>
-            </thead>
-            <tbody>
-            {shortlist.map((artist, index) => (
-              <tr key={index}>
-                <td>
-                  <FontAwesomeIcon
-                    icon={faStar}
-                    onClick={handleUpdateFavorites(artist)}
-                    className={isFavorite(artist.mbid) ? 'text-primary' : 'text-secondary'}
-                  />
-                </td>
+    <Col className="mt-2">
+      <h1>Shortlist</h1>
 
-                <td>
-                  {artist.name}
-                </td>
-              </tr>
-            ))}
-            </tbody>
-          </Table>
-        )}
-      </Col>
-    </Row>
+      <Table>
+        <thead>
+          <tr>
+            <th>Artist</th>
+            <th/>
+          </tr>
+        </thead>
+
+        <tbody>
+        {shortlist.map((artist, index) => (
+          <tr key={index}>
+            <td>
+              {artist.name}
+            </td>
+
+            <td className="d-flex justify-content-end">
+              <Button
+                onClick={handleUpdateFavorites(artist)}
+              >
+                {isFavorite(artist.mbid) ? "Remove" : "Add to Favorites"}
+              </Button>
+            </td>
+          </tr>
+        ))}
+        </tbody>
+      </Table>
+    </Col>
   )
 };
 

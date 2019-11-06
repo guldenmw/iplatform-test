@@ -46,11 +46,9 @@ const SearchReleases: FC<IProps> = (props) => {
 
   return (
     <Container>
-      <Row>
-        <Col>
-          <h2>Search Releases</h2>
-        </Col>
-      </Row>
+      <Col className="mt-5">
+        <h1>Search Releases</h1>
+      </Col>
       <SearchBar
         onClick={handleSearchStart}
         onChange={searchTextChange}
@@ -63,7 +61,7 @@ const SearchReleases: FC<IProps> = (props) => {
 
       {!showEmptyTable && (
         <Col>
-          <h1>Search Results:</h1>
+          <h2>Search Results:</h2>
 
           <Table responsive size='md'>
             <thead>
@@ -75,12 +73,14 @@ const SearchReleases: FC<IProps> = (props) => {
             {isLoading ? (
               tableLoadingBody
             ) : (
-              results.map((item, index) => (
-                <SearchArtistReleasesItem
-                  key={index}
-                  item={item}
-                />
-              ))
+              <tbody>
+                {results.map((item, index) => (
+                  <SearchArtistReleasesItem
+                    key={index}
+                    item={item}
+                  />
+                ))}
+              </tbody>
             )}
           </Table>
         </Col>

@@ -50,10 +50,10 @@ const SearchArtistReleasesItem: FC<IProps> = (props) => {
   };
 
   return (
-    <tbody>
+    <>
       <tr>
         <td>{name}</td>
-        <td>
+        <td className="d-flex justify-content-end">
           <Button onClick={handleToggleReleases}>
             {displayReleases ? "Hide Releases" : "Show Releases"}
           </Button>
@@ -66,7 +66,7 @@ const SearchArtistReleasesItem: FC<IProps> = (props) => {
           artistId={id}
         />
       )}
-    </tbody>
+    </>
   )
 };
 

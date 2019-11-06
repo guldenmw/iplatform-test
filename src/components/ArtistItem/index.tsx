@@ -1,32 +1,46 @@
 import React, { FC } from 'react';
 import { connect } from 'react-redux';
-import { Image } from 'react-bootstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
-import { mapDispatchToProps } from './container';
-import ILastFMArtistResult from '../../core/store/search/lastfm/types/LastFMArtistsResults';
+import {Button, Image} from 'react-bootstrap';
+import {mapDispatchToProps, mapStateToProps} from './container';
+import ILastFMArtist from '../../core/store/search/lastfm/types/LastFMArtistsResults';
 
 interface IComponentProps {
-  item: ILastFMArtistResult;
+  item: ILastFMArtist;
+  shortlist?: ILastFMArtist[];
 }
 
 interface IContainerProps {
-  addToShortlist?: (shortlistItem: ILastFMArtistResult) => void;
-  removeFromShortlist?: (shortlistItem: ILastFMArtistResult) => void;
+  addToShortlist?: (shortlistItem: ILastFMArtist) => void;
+  removeFromShortlist?: (shortlistItem: ILastFMArtist) => void;
 }
 
 type IProps = IComponentProps & IContainerProps;
 
-const ArtistItem: FC<IProps> = ({ item, addToShortlist }) => {
+const ArtistItem: FC<IProps> = (props) => {
+  const {
+    item,
+    shortlist,
+    addToShortlist,
+    removeFromShortlist
+  } = props;
+
   const {
     image,
     name,
+    mbid
   } = item;
+
+  const isInShortlist = shortlist && shortlist.some(item => item.mbid === mbid);
 
   const [{ '#text': imageUrl }] = image;
 
-  const handleAddButtonClick = (event) => {
-    addToShortlist(item);
+  const handleUpdateShortlist = (event) => {
+    if (isInShortlist) {
+      removeFromShortlist(item)
+
+    } else {
+      addToShortlist(item);
+    }
   };
 
   return (
@@ -35,18 +49,18 @@ const ArtistItem: FC<IProps> = ({ item, addToShortlist }) => {
         {!!imageUrl && (<Image src={imageUrl}/>)}
       </td>
       <td>{name}</td>
-      <td>
-        <FontAwesomeIcon
-          icon={faPlusCircle}
-          onClick={handleAddButtonClick}
-          style={{ cursor: 'pointer' }}
-        />
+      <td className="d-flex justify-content-end">
+        <Button
+          onClick={handleUpdateShortlist}
+        >
+          {isInShortlist ? "Remove" : "Add to Shortlist"}
+        </Button>
       </td>
     </tr>
   )
 };
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(ArtistItem) as typeof ArtistItem;

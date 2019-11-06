@@ -21,9 +21,7 @@ const SearchBar = ({ onClick, onChange, value }: SearchBarProps) => {
   };
 
   const handleKeyDown = (e) => {
-    console.log(e);
-    console.log(e.key);
-    if (e.key === 'Enter') {
+    if ( e.key === 'Enter' ) {
       onClick(value);
     }
   };

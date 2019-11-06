@@ -10,7 +10,7 @@ import {
 
 import ILastFMArtist from '../types/LastFMArtistsResults';
 
-interface ISearchReducer {
+export interface IMusicBrainzSearchReducer {
   artists: {
     searchText: string;
     results: ILastFMArtist[];
@@ -26,7 +26,7 @@ interface ISearchReducer {
   showReleases: any[];
 }
 
-const initialState: ISearchReducer = {
+const initialState: IMusicBrainzSearchReducer = {
   artists: {
     searchText: '',
     results: [],
@@ -42,7 +42,7 @@ const initialState: ISearchReducer = {
   showReleases: []
 };
 
-const musicBrainzReducer = (state: ISearchReducer = initialState, action): ISearchReducer => {
+const musicBrainzReducer = (state: IMusicBrainzSearchReducer = initialState, action): IMusicBrainzSearchReducer => {
   const { type, data } = action;
   switch (type) {
     case ARTISTS_RELEASES_SEARCH_TEXT_CHANGE: {
@@ -104,7 +104,7 @@ const musicBrainzReducer = (state: ISearchReducer = initialState, action): ISear
     }
 
     case SHOW_ARTIST_RELEASES: {
-      if (state.showReleases.includes(data)) {
+      if ( state.showReleases.includes(data) ) {
         return state
       }
 
@@ -118,7 +118,7 @@ const musicBrainzReducer = (state: ISearchReducer = initialState, action): ISear
     }
 
     case HIDE_ARTIST_RELEASES: {
-      if (!state.showReleases.includes(data)) {
+      if ( !state.showReleases.includes(data) ) {
         return state
       }
 

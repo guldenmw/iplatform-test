@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
-import {Col, Row} from "react-bootstrap";
-import {IconDefinition} from '@fortawesome/fontawesome-svg-core';
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import { Col, Row } from "react-bootstrap";
+import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 interface EmptyTable {
   message: string;

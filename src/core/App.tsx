@@ -9,7 +9,7 @@ import {
 } from 'react-router-dom';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {Navbar} from 'react-bootstrap';
+import { Navbar } from 'react-bootstrap';
 
 import store from './store';
 

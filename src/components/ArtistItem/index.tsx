@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { connect } from 'react-redux';
-import {Button, Image} from 'react-bootstrap';
-import {mapDispatchToProps, mapStateToProps} from './container';
+import { Button, Image } from 'react-bootstrap';
+import { mapDispatchToProps, mapStateToProps } from './container';
 import ILastFMArtist from '../../core/store/search/lastfm/types/LastFMArtistsResults';
 
 interface IComponentProps {
@@ -35,7 +35,7 @@ const ArtistItem: FC<IProps> = (props) => {
   const [{ '#text': imageUrl }] = image;
 
   const handleUpdateShortlist = (event) => {
-    if (isInShortlist) {
+    if ( isInShortlist ) {
       removeFromShortlist(item)
 
     } else {

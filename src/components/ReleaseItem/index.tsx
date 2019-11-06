@@ -33,17 +33,17 @@ const ReleaseItem: FC<IProps> = (props) => {
   } = item;
 
   let label: string[] = [''];
-  if (labelInfo) {
+  if ( labelInfo ) {
     label = labelInfo.map(item => {
       const { label } = item;
-      if (label && label.name) {
+      if ( label && label.name ) {
         return label.name
       }
     });
   }
 
   const handleFavoritesUpdate = (event) => {
-    if (isFavorite) {
+    if ( isFavorite ) {
       removeFromFavorites(item);
 
     } else {

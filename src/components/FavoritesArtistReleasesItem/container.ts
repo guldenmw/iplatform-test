@@ -1,4 +1,4 @@
-import {AppState} from '../../core/store';
+import { AppState } from '../../core/store';
 
 import {
   removeFavoritesArtist,
@@ -6,7 +6,7 @@ import {
   showFavoritesReleases
 } from '../../core/store/favorites/actions';
 
-import {IFavoritesArtist} from '../../core/store/favorites/types';
+import { IFavoritesArtist } from '../../core/store/favorites/types';
 
 
 export const mapStateToProps = (state: AppState) => {

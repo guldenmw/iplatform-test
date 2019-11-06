@@ -5,7 +5,7 @@ import {
   mapDispatchToProps,
 } from './container';
 
-import {Button, Col, Table} from 'react-bootstrap';
+import { Button, Col, Table } from 'react-bootstrap';
 import ILastFMArtist from "../../core/store/search/lastfm/types/LastFMArtistsResults";
 
 interface IProps {
@@ -28,7 +28,7 @@ const Shortlist: FC<IProps> = (props) => {
   };
 
   const handleUpdateFavorites = (artist: ILastFMArtist) => (event) => {
-    if (isFavorite(artist.mbid)) {
+    if ( isFavorite(artist.mbid) ) {
       removeArtistFromFavorites(artist)
 
     } else {

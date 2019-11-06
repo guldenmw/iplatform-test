@@ -56,7 +56,7 @@ const SearchArtists: FC<IProps> = (props) => {
   };
 
   const shortlistButtonValue = () => {
-    if (shortlistEmpty) {
+    if ( shortlistEmpty ) {
       return 'Shortlist Empty'
 
     } else if(showShortlist) {
@@ -66,8 +66,6 @@ const SearchArtists: FC<IProps> = (props) => {
       return 'Show Shortlist'
     }
   };
-
-  console.log(shortlistButtonValue());
 
   return (
     <Container>

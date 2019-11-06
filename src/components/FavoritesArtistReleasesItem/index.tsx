@@ -1,12 +1,12 @@
 import React, { FC } from 'react';
 import { connect } from 'react-redux';
-import {Button} from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMinusCircle } from '@fortawesome/free-solid-svg-icons';
 import { mapStateToProps, mapDispatchToProps } from './container';
 import ReleasesTable from '../ReleasesTable';
 import IMusicBrainzRelease from '../../core/store/search/musicbrainz/types/MusicBrainzReleasesResults';
-import {IFavoritesArtist} from '../../core/store/favorites/types';
+import { IFavoritesArtist } from '../../core/store/favorites/types';
 
 
 interface IComponentProps {
@@ -38,7 +38,7 @@ const FavoritesArtistReleasesItem: FC<IProps> = (props) => {
 
   let artistReleases = [];
 
-  if (releases) {
+  if ( releases ) {
     artistReleases = releases.filter(item => {
       return item['artist-credit'][0].artist.name === name
     })
@@ -47,7 +47,7 @@ const FavoritesArtistReleasesItem: FC<IProps> = (props) => {
   const displayReleases = showReleases && showReleases.includes(mbid);
 
   const handleToggleReleases = async (event) => {
-    if (displayReleases) {
+    if ( displayReleases ) {
       hideFavoritesReleases(mbid)
 
     } else {

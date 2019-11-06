@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { connect } from 'react-redux';
-import {Button} from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import { mapStateToProps, mapDispatchToProps } from './container';
 import IMusicBrainzArtist from "../../core/store/search/musicbrainz/types/MusicBrainzArtistsResults";
 import ReleasesTable from "../ReleasesTable";
@@ -36,7 +36,7 @@ const SearchArtistReleasesItem: FC<IProps> = (props) => {
 
   let artistReleases = [];
 
-  if (releases) {
+  if ( releases ) {
     artistReleases = releases.filter(item => {
       return item["artist-credit"][0].artist.name === name
     });

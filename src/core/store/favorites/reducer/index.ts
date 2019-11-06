@@ -9,7 +9,7 @@ import {
 
 import ILastFMArtist from '../../search/lastfm/types/LastFMArtistsResults';
 import IMusicBrainzRelease from '../../search/musicbrainz/types/MusicBrainzReleasesResults';
-import {IFavoritesArtist} from '../types';
+import { IFavoritesArtist } from '../types';
 
 
 export interface IFavoritesReducerState {
@@ -35,6 +35,10 @@ const favouritesReducer = (state = initialState, action): IFavoritesReducerState
       const { mbid, name }: ILastFMArtist = data;
       const artistStub = { mbid, name };
 
+      if ( state.artists.some(item => item.mbid === mbid) ) {
+        return state
+      }
+
       return {
         ...state,
         artists: [
@@ -52,6 +56,10 @@ const favouritesReducer = (state = initialState, action): IFavoritesReducerState
     }
 
     case ADD_FAVORITES_RELEASE: {
+      if ( state.releases.some(item => item.id === data.id) ) {
+        return state
+      }
+
       const artist = {
         name: data['artist-credit'][0].artist.name,
         mbid: data['artist-credit'][0].artist.id,
@@ -59,7 +67,7 @@ const favouritesReducer = (state = initialState, action): IFavoritesReducerState
 
       let artistExist = state.artists.some(item => item.mbid === artist.mbid);
 
-      if (!artistExist) {
+      if ( !artistExist ) {
         return {
           ...state,
           artists: [
@@ -90,7 +98,7 @@ const favouritesReducer = (state = initialState, action): IFavoritesReducerState
     }
 
     case SHOW_FAVORITE_RELEASES: {
-      if (state.showReleases.includes(data)) {
+      if ( state.showReleases.includes(data) ) {
         return state
       }
 
@@ -104,7 +112,7 @@ const favouritesReducer = (state = initialState, action): IFavoritesReducerState
     }
 
     case HIDE_FAVORITE_RELEASES: {
-      if (!state.showReleases.includes(data)) {
+      if ( !state.showReleases.includes(data) ) {
         return state
       }
 

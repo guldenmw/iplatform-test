@@ -12,12 +12,13 @@ export default (state = initialState, action: { type: string, data: ILastFMArtis
   switch(type) {
     case ADD_SHORTLIST_ITEM: {
       // Don't add to the shortlist if the item's ID already exists
-      if (state.some(item => item.mbid === data.mbid)) {
+      if ( state.some(item => item.mbid === data.mbid) ) {
         return state;
       }
+
       return [
-        ...state,
         data,
+        ...state,
       ];
     }
     case REMOVE_SHORTLIST_ITEM: {

@@ -1,7 +1,7 @@
 import { AppState } from "../../core/store";
 
 import searchReleases from "../../core/store/search/musicbrainz/thunks/SearchReleases";
-import {hideArtistReleases, showArtistReleases} from "../../core/store/search/musicbrainz/actions";
+import { hideArtistReleases, showArtistReleases } from "../../core/store/search/musicbrainz/actions";
 
 
 export const mapStateToProps = (state: AppState) => {

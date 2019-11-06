@@ -1,9 +1,9 @@
-import {combineReducers, createStore, applyMiddleware} from "redux";
+import { combineReducers, createStore, applyMiddleware } from "redux";
 import favorites from "./favorites/reducer";
 import musicBrainzReducer from "./search/musicbrainz/reducer";
 import lastFMReducer from "./search/lastfm/reducer";
 import shortlist from "./shortlist/reducer";
-import {composeWithDevTools} from "redux-devtools-extension";
+import { composeWithDevTools } from "redux-devtools-extension";
 import thunk from 'redux-thunk';
 
 

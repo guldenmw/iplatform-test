@@ -1,4 +1,4 @@
-import {AppState} from "../../core/store";
+import { AppState } from "../../core/store";
 
 
 export const mapStateToProps = (state: AppState) => {

@@ -6,20 +6,20 @@ import {
 
 import ILastFMArtist from '../types/LastFMArtistsResults';
 
-interface ISearchReducer {
+export interface ILastFMSearchReducer {
   searchText: string;
   results: ILastFMArtist[];
   isLoading: boolean;
 }
 
-const initialState: ISearchReducer = {
+const initialState: ILastFMSearchReducer = {
   searchText: '',
   results: [],
   isLoading: false
 };
 
 
-const lastFMReducer = (state: ISearchReducer = initialState, action): ISearchReducer => {
+const lastFMReducer = (state: ILastFMSearchReducer = initialState, action): ILastFMSearchReducer => {
   const { type, data } = action;
   switch (type) {
     case ARTISTS_SEARCH_TEXT_CHANGE: {

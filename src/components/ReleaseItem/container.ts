@@ -1,6 +1,6 @@
-import {AppState} from '../../core/store';
+import { AppState } from '../../core/store';
 
-import {addFavoritesRelease, removeFavoritesRelease} from '../../core/store/favorites/actions';
+import { addFavoritesRelease, removeFavoritesRelease } from '../../core/store/favorites/actions';
 import IMusicBrainzRelease from '../../core/store/search/musicbrainz/types/MusicBrainzReleasesResults';
 
 

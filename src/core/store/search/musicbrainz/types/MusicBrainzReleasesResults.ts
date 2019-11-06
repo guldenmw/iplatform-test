@@ -26,6 +26,7 @@ interface IMusicBrainzRelease {
 }
 
 interface IArtistCredit {
+    name:   string;
     artist: IArtist;
 }
 
@@ -69,8 +70,11 @@ interface IReleaseEvent {
 }
 
 interface IReleaseGroup {
-    id:             string;
-    "primary-type": string;
+    id:                 string;
+    "primary-type":     string;
+    "type-id":          string;
+    title:              string;
+    "secondary-types":  string[];
 }
 
 interface ITextRepresentation {

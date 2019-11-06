@@ -8,7 +8,8 @@ export const mapStateToProps = (state: AppState) => {
   const {
     musicBrainz: {
       releases: {
-        results
+        results,
+        isLoading
       },
       showReleases
     }
@@ -16,7 +17,8 @@ export const mapStateToProps = (state: AppState) => {
 
   return {
     releases: results,
-    showReleases
+    showReleases,
+    isLoading
   };
 };
 

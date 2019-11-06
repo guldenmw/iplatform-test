@@ -1,36 +1,44 @@
 import {AppState} from "../../core/store";
 
-import {removeFavoritesArtist} from "../../core/store/favorites/actions";
-import IMusicBrainzArtist from "../../core/store/search/musicbrainz/types/MusicBrainzArtistsResults";
-import {hideArtistReleases, showArtistReleases} from "../../core/store/search/musicbrainz/actions";
+import {
+  removeFavoritesArtist,
+  hideFavoritesReleases,
+  showFavoritesReleases
+} from "../../core/store/favorites/actions";
+
+import {IFavoritesArtist} from "../../core/store/favorites/types";
 
 
 export const mapStateToProps = (state: AppState) => {
   const {
     favorites: {
       releases,
-      showReleases
-    }
+      showReleases,
+      isLoading
+    },
   } = state;
 
   return {
     releases,
-    showReleases
+    showReleases,
+    isLoading
   };
 };
 
 export const mapDispatchToProps = (dispatch) => {
   return {
-    removeFromFavorites: (artist: IMusicBrainzArtist) => {
+    removeFromFavorites: (artist: IFavoritesArtist) => {
       dispatch(removeFavoritesArtist(artist));
     },
 
-    showArtistReleases: (artistId: string) => {
-      dispatch(showArtistReleases(artistId))
+    showFavoritesReleases: (artistId: string) => {
+      console.log(artistId);
+      dispatch(showFavoritesReleases(artistId))
     },
 
-    hideArtistReleases: (artistId: string) => {
-      dispatch(hideArtistReleases(artistId))
+    hideFavoritesReleases: (artistId: string) => {
+      console.log(artistId);
+      dispatch(hideFavoritesReleases(artistId))
     }
   }
 };

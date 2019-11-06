@@ -4,21 +4,21 @@ import {Button} from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMinusCircle } from '@fortawesome/free-solid-svg-icons';
 import { mapStateToProps, mapDispatchToProps } from './container';
-import IMusicBrainzArtist from "../../core/store/search/musicbrainz/types/MusicBrainzArtistsResults";
 import ReleasesTable from "../ReleasesTable";
 import IMusicBrainzRelease from "../../core/store/search/musicbrainz/types/MusicBrainzReleasesResults";
+import {IFavoritesArtist} from "../../core/store/favorites/types";
 
 
 interface IComponentProps {
-  item: IMusicBrainzArtist;
+  item: IFavoritesArtist;
   releases?: IMusicBrainzRelease[];
   showReleases?: string[];
 }
 
 interface IContainerProps {
-  removeFromFavorites?: (artist: IMusicBrainzArtist) => void;
-  showArtistReleases?: (artistId: string) => void;
-  hideArtistReleases?: (artistId: string) => void;
+  removeFromFavorites?: (artist: IFavoritesArtist) => void;
+  showFavoritesReleases?: (artistId: string) => void;
+  hideFavoritesReleases?: (artistId: string) => void;
 }
 
 type IProps = IComponentProps & IContainerProps;
@@ -30,11 +30,11 @@ const FavoritesArtistReleasesItem: FC<IProps> = (props) => {
     releases,
     showReleases,
     removeFromFavorites,
-    showArtistReleases,
-    hideArtistReleases
+    showFavoritesReleases,
+    hideFavoritesReleases
   } = props;
 
-  const { name, id } = item;
+  const { name, mbid } = item;
 
   let artistReleases = [];
 
@@ -44,10 +44,15 @@ const FavoritesArtistReleasesItem: FC<IProps> = (props) => {
     })
   }
 
-  const displayReleases = showReleases && showReleases.includes(id);
+  const displayReleases = showReleases && showReleases.includes(mbid);
 
   const handleToggleReleases = async (event) => {
-    displayReleases ? hideArtistReleases(id) : showArtistReleases(id);
+    if (displayReleases) {
+      hideFavoritesReleases(mbid)
+
+    } else {
+      showFavoritesReleases(mbid);
+    }
   };
 
   const handleRemoveArtist = (event) => {
@@ -69,7 +74,13 @@ const FavoritesArtistReleasesItem: FC<IProps> = (props) => {
         </td>
       </tr>
 
-      {displayReleases && <ReleasesTable releases={artistReleases} artistId={id}/>}
+      {displayReleases && (
+        <ReleasesTable
+          releases={artistReleases}
+          artistId={mbid}
+        />
+      )
+      }
     </tbody>
   )
 };

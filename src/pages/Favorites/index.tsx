@@ -36,10 +36,10 @@ const Favorites: FC<IProps> = (props) => {
               <th/>
             </tr>
             </thead>
-            {favoriteArtists.map((artist, index) => (
+            {favoriteArtists.map((item, index) => (
               <FavoritesArtistReleasesItem
                 key={index}
-                item={artist}
+                item={item}
               />
             ))}
           </Table>

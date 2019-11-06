@@ -8,7 +8,7 @@ import { mapStateToProps } from "./container";
 
 interface IProps {
   artistId: string;
-  releases?: IMusicBrainzRelease[];
+  releases: IMusicBrainzRelease[];
   isLoading?: string[];
 }
 

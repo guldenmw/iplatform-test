@@ -6,8 +6,8 @@ export const REMOVE_FAVORITES_ARTIST = 'REMOVE_FAVORITES_ARTIST';
 export const ADD_FAVORITES_RELEASE = 'ADD_FAVORITES_RELEASE';
 export const REMOVE_FAVORITES_RELEASE = 'REMOVE_FAVORITES_RELEASE';
 
-export const SHOW_ARTIST_RELEASES= 'SHOW_ARTIST_RELEASES';
-export const HIDE_ARTIST_RELEASES= 'HIDE_ARTIST_RELEASES';
+export const SHOW_FAVORITE_RELEASES= 'SHOW_FAVORITE_RELEASES';
+export const HIDE_FAVORITE_RELEASES= 'HIDE_FAVORITE_RELEASES';
 
 
 export const addFavoritesArtist = (data?: any) => ({
@@ -26,14 +26,14 @@ export const removeFavoritesRelease = (data?: IMusicBrainzRelease) => ({
   type: REMOVE_FAVORITES_RELEASE, data,
 });
 
-export const showArtistReleases = (data?) => {
+export const showFavoritesReleases = (data?) => {
   return {
-    type: SHOW_ARTIST_RELEASES, data
+    type: SHOW_FAVORITE_RELEASES, data
   }
 };
 
-export const hideArtistReleases = (data?) => {
+export const hideFavoritesReleases = (data?) => {
   return {
-    type: HIDE_ARTIST_RELEASES, data
+    type: HIDE_FAVORITE_RELEASES, data
   }
 };

@@ -3,18 +3,14 @@ import {
   ADD_FAVORITES_RELEASE,
   REMOVE_FAVORITES_ARTIST,
   REMOVE_FAVORITES_RELEASE,
-  SHOW_ARTIST_RELEASES,
-  HIDE_ARTIST_RELEASES
+  SHOW_FAVORITE_RELEASES,
+  HIDE_FAVORITE_RELEASES
 } from '../actions';
 
 import ILastFMArtist from "../../search/lastfm/types/LastFMArtistsResults";
 import IMusicBrainzRelease from '../../search/musicbrainz/types/MusicBrainzReleasesResults';
+import {IFavoritesArtist} from "../types";
 
-
-interface IFavoritesArtist {
-  name: string;
-  mbid: string;
-}
 
 interface IFavoritesReducerState {
   artists: IFavoritesArtist[];
@@ -93,7 +89,8 @@ const favouritesReducer = (state = initialState, action): IFavoritesReducerState
       }
     }
 
-    case SHOW_ARTIST_RELEASES: {
+    case SHOW_FAVORITE_RELEASES: {
+      console.log(data);
       if (state.showReleases.includes(data)) {
         return state
       }
@@ -107,7 +104,7 @@ const favouritesReducer = (state = initialState, action): IFavoritesReducerState
       }
     }
 
-    case HIDE_ARTIST_RELEASES: {
+    case HIDE_FAVORITE_RELEASES: {
       if (!state.showReleases.includes(data)) {
         return state
       }

@@ -60,7 +60,12 @@ const SearchArtistReleasesItem: FC<IProps> = (props) => {
         </td>
       </tr>
 
-      {displayReleases && <ReleasesTable releases={artistReleases} artistId={id}/>}
+      {displayReleases && (
+        <ReleasesTable
+          releases={artistReleases}
+          artistId={id}
+        />
+      )}
     </tbody>
   )
 };

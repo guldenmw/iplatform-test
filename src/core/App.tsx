@@ -12,7 +12,7 @@ import {
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Navbar} from 'react-bootstrap';
 
-import { store } from './store';
+import { store, persistor } from './store';
 
 import SearchArtists from '../pages/SearchArtists';
 import SearchReleases from '../pages/SearchReleases';
@@ -22,7 +22,7 @@ import Favorites from '../pages/Favorites';
 const App: FC = () => {
   return (
     <Provider store={store}>
-      {/*<PersistGate loading={null} persistor={persistor}>*/}
+      <PersistGate loading={null} persistor={persistor}>
         <Router>
           <Navbar bg='primary'>
             <Navbar.Toggle aria-controls='basic-navbar-nav'/>
@@ -45,7 +45,7 @@ const App: FC = () => {
             </Route>
           </Switch>
         </Router>
-      {/*</PersistGate>*/}
+      </PersistGate>
     </Provider>
   );
 };

@@ -20,16 +20,16 @@ const rootReducer = combineReducers({
   shortlist,
 });
 
-// const persistedReducer = persistReducer(persistConfig, rootReducer);
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export type AppState = ReturnType<typeof rootReducer>;
 
 export const store = createStore(
-  rootReducer,
+  persistedReducer,
   composeWithDevTools(
     applyMiddleware(thunk)
   )
 );
 
-// export const persistor = persistStore(store);
+export const persistor = persistStore(store);
 

@@ -56,6 +56,10 @@ below.
 ## Simple build for production
 
     $ yarn run build
+    
+## Testing
+
+    $ yarn test
 
 ## Languages & tools
 
